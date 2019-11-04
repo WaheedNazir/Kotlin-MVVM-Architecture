@@ -17,7 +17,7 @@ A sample app that display list of Google news. The purpose of this project to il
 
 
 ## Architecture
-<img alt="MVVM Architecture" height="600px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Architecture_design_new.jpg" />
+<img alt="MVVM Architecture" height="700px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Architecture_design_new.jpg" />
 
 
 ## NetworkBoundResource
