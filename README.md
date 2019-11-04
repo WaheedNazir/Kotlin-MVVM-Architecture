@@ -17,7 +17,7 @@ This is a simple application that display list/grid of available Google news. Th
 
 
 ## Architecture
-<img alt="MVVM Architecture" height="450px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/screens/Architecture_design.jpg" />
+<img alt="MVVM Architecture" height="450px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Architecture_design.jpg" />
 
 ### Dependencies used
 
