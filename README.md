@@ -17,15 +17,15 @@ A sample app that display list of Google news. The purpose of this project to il
 
 
 ## Architecture
-<img alt="MVVM Architecture" height="600px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Architecture_design.jpg" />
+<img alt="MVVM Architecture" height="600px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Architecture_design_new.jpg" />
 
 
 ## NetworkBoundResource
-<img alt="MVVM Architecture" height="600px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/network-bound-resource.png" />
+<img alt="MVVM Architecture" height="500px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/network-bound-resource.png" />
 
 
 # Mediator LiveData
-<img alt="MVVM Architecture" height="600px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Mediator_LiveData_Combined_These_Data_Sounrces.png" />
+<img alt="MVVM Architecture" height="350px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Mediator_LiveData_Combined_These_Data_Sounrces.png" />
 
 
 ### Dependencies used
