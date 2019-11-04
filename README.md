@@ -1,6 +1,6 @@
 ## Kotlin MVVM Architecture
 
-This is a simple application that display list/grid of available Google news. The purpose of this project to illustrate the usage of MVVM architecture design pattern that follow the best oractices of Object Oriented Design Patterns using the following technology stack.
+A sample app that display list of Google news. The purpose of this project to illustrate the usage of MVVM architecture design pattern that follow the best practices of Object Oriented Design Patterns using the following technology stack.
 
  1. Architeture Design Pattern
  2. MVVM
@@ -17,7 +17,16 @@ This is a simple application that display list/grid of available Google news. Th
 
 
 ## Architecture
-<img alt="MVVM Architecture" height="450px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/screens/Architecture_design.jpg" />
+<img alt="MVVM Architecture" height="600px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Architecture_design.jpg" />
+
+
+## NetworkBoundResource
+<img alt="MVVM Architecture" height="600px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/network-bound-resource.png" />
+
+
+# Mediator LiveData
+<img alt="MVVM Architecture" height="600px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Mediator_LiveData_Combined_These_Data_Sounrces.png" />
+
 
 ### Dependencies used
 
