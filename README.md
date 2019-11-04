@@ -79,7 +79,7 @@ A sample app that display list of Google news. The purpose of this project to il
     })
 
 ## Author
-[Waheed Nazir](https://www.linkedin.com/in/waheed-nazir-36521579/ "Waheed Nazir (GreenProLogix)")
+[Waheed Nazir](https://github.com/WaheedNazir "Waheed Nazir (WaveTechStudio)")
 
 
 ## Sources
