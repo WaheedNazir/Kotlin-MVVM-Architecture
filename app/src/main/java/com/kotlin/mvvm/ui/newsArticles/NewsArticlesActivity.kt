@@ -1,5 +1,7 @@
 package com.kotlin.mvvm.ui.newsArticles
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kotlin.mvvm.R
@@ -22,6 +24,11 @@ import kotlinx.android.synthetic.main.progress_layout_news_article.*
  */
 class NewsArticlesActivity : BaseActivity() {
 
+
+    companion object {
+        val KEY_COUNTRY_SHORT_KEY: String = "COUNTRY_SHORT_KEY"
+    }
+
     private val newsArticleViewModel by lazy { getViewModel<NewsArticleViewModel>() }
 
     /**
@@ -31,7 +38,6 @@ class NewsArticlesActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_articles)
 
-        // Setting up RecyclerView and adapter
         news_list.setEmptyView(empty_view)
         news_list.setProgressView(progress_view)
 
@@ -41,6 +47,8 @@ class NewsArticlesActivity : BaseActivity() {
         news_list.adapter = adapter
         news_list.layoutManager = LinearLayoutManager(this)
 
+
+        //intent.getStringExtra(KEY_COUNTRY_SHORT_KEY)
         /*
         * Observing for data change, Cater DB and Network Both
         * */

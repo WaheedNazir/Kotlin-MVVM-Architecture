@@ -1,13 +1,13 @@
-package com.kotlin.mvvm.repository.repo
+package com.kotlin.mvvm.repository.repo.news
 
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.kotlin.mvvm.app.AppExecutors
 import com.kotlin.mvvm.repository.api.ApiServices
-import com.kotlin.mvvm.repository.db.NewsArticlesDao
-import com.kotlin.mvvm.repository.model.NewsArticles
-import com.kotlin.mvvm.repository.model.NewsSource
+import com.kotlin.mvvm.repository.db.news.NewsArticlesDao
+import com.kotlin.mvvm.repository.model.news.NewsArticles
+import com.kotlin.mvvm.repository.model.news.NewsSource
 import com.kotlin.mvvm.utils.ConnectivityUtil
 
 import javax.inject.Singleton

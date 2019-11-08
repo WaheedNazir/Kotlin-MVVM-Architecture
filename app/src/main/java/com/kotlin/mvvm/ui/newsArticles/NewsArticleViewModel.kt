@@ -1,12 +1,13 @@
 package com.kotlin.mvvm.ui.newsArticles
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kotlin.mvvm.repository.api.network.Resource
-import com.kotlin.mvvm.repository.model.NewsArticles
-import com.kotlin.mvvm.repository.model.NewsSource
-import com.kotlin.mvvm.repository.repo.NewsRepositoryUsingBoundResources
-import com.kotlin.mvvm.repository.repo.NewsRepositoryUsingExecutor
+import com.kotlin.mvvm.repository.model.news.NewsArticles
+import com.kotlin.mvvm.repository.model.news.NewsSource
+import com.kotlin.mvvm.repository.repo.news.NewsRepositoryUsingBoundResources
+import com.kotlin.mvvm.repository.repo.news.NewsRepositoryUsingExecutor
 import javax.inject.Inject
 
 /**
@@ -25,7 +26,7 @@ class NewsArticleViewModel @Inject constructor(
      * Loading news articles from internet and database
      */
     private var newsArticles: LiveData<Resource<List<NewsArticles>?>> =
-        newsRepository.getNewsArticles()
+        newsRepository.getNewsArticles("us")
 
 
     fun getNewsArticles() = newsArticles
@@ -35,7 +36,7 @@ class NewsArticleViewModel @Inject constructor(
      * Loading news articles from internet only
      */
     private var newsArticlesFromOnlyServer: LiveData<Resource<NewsSource>> =
-        newsRepository.getNewsArticlesFromServerOnly()
+        newsRepository.getNewsArticlesFromServerOnly("us")
 
     fun getNewsArticlesFromServer() = newsArticlesFromOnlyServer
 

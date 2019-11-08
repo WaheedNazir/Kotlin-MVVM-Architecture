@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.kotlin.mvvm.R
-import com.kotlin.mvvm.repository.model.NewsArticles
+import com.kotlin.mvvm.repository.model.news.NewsArticles
 import com.kotlin.mvvm.utils.extensions.inflate
 import kotlinx.android.synthetic.main.row_news_article.view.*
 

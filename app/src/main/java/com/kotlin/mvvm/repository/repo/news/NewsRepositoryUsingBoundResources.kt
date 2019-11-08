@@ -1,19 +1,19 @@
-package com.kotlin.mvvm.repository.repo
+package com.kotlin.mvvm.repository.repo.news
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import com.kotlin.mvvm.BuildConfig
 import com.kotlin.mvvm.app.AppExecutors
 import com.kotlin.mvvm.repository.api.ApiServices
 import com.kotlin.mvvm.repository.api.network.NetworkAndDBBoundResource
 import com.kotlin.mvvm.repository.api.network.NetworkResource
 import com.kotlin.mvvm.repository.api.network.Resource
-import com.kotlin.mvvm.repository.db.NewsArticlesDao
-import com.kotlin.mvvm.repository.model.NewsArticles
-import com.kotlin.mvvm.repository.model.NewsSource
+import com.kotlin.mvvm.repository.db.news.NewsArticlesDao
+import com.kotlin.mvvm.repository.model.news.NewsArticles
+import com.kotlin.mvvm.repository.model.news.NewsSource
 import com.kotlin.mvvm.utils.ConnectivityUtil
 import javax.inject.Inject
 import javax.inject.Singleton
-
 
 /**
  * Created by Waheed on 04,November,2019
@@ -36,8 +36,11 @@ class NewsRepositoryUsingBoundResources @Inject constructor(
      * Fetch the news articles from database if exist else fetch from web
      * and persist them in the database
      */
-    fun getNewsArticles(): LiveData<Resource<List<NewsArticles>?>> {
+    fun getNewsArticles(countryShortKey: String): LiveData<Resource<List<NewsArticles>?>> {
 
+        val data = HashMap<String, String>()
+        data.put("country", countryShortKey)
+        data.put("apiKey", BuildConfig.NEWS_API_KEY)
 
         return object : NetworkAndDBBoundResource<List<NewsArticles>, NewsSource>(appExecutors) {
             override fun saveCallResult(item: NewsSource) {
@@ -52,7 +55,8 @@ class NewsRepositoryUsingBoundResources @Inject constructor(
 
             override fun loadFromDb() = newsDao.getNewsArticles()
 
-            override fun createCall() = apiServices.getNewsSource()
+            override fun createCall() =
+                apiServices.getNewsSource(data)
 
         }.asLiveData()
     }
@@ -62,11 +66,16 @@ class NewsRepositoryUsingBoundResources @Inject constructor(
      * and persist them in the database
      * LiveData<Resource<NewsSource>>
      */
-    fun getNewsArticlesFromServerOnly(): LiveData<Resource<NewsSource>> {
+    fun getNewsArticlesFromServerOnly(countryShortKey: String):
+            LiveData<Resource<NewsSource>> {
+
+        val data = HashMap<String, String>()
+        data.put("country", countryShortKey)
+        data.put("apiKey", BuildConfig.NEWS_API_KEY)
 
         return object : NetworkResource<NewsSource>() {
             override fun createCall(): LiveData<Resource<NewsSource>> {
-                return apiServices.getNewsSource()
+                return apiServices.getNewsSource(data)
             }
 
         }.asLiveData()

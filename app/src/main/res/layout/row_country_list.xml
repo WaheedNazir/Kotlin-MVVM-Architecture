@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/card_margin"
+    android:layout_marginLeft="@dimen/card_margin"
+    android:layout_marginTop="@dimen/normal_padding"
+    android:layout_marginEnd="@dimen/card_margin"
+    android:layout_marginRight="@dimen/card_margin"
+    android:layout_marginBottom="@dimen/card_elevation"
+    app:cardElevation="@dimen/card_elevation">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_country_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/country_image_size"
+            android:contentDescription="@string/news_image" />
+
+        <TextView
+            android:id="@+id/tv_country_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_country_image"
+            android:background="@color/countryNameBackgroundLight"
+            android:gravity="center_horizontal"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:padding="@dimen/small_padding"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            tools:text="ABC News" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

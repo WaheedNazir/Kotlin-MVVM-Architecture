@@ -29,7 +29,7 @@
                 android:layout_height="@dimen/image_size"
                 android:contentDescription="@string/news_image"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/img_test_one" />
+                tools:src="@drawable/loading_banner_image" />
 
             <TextView
                 android:id="@+id/tvNewsAuthor"

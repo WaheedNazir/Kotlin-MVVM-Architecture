@@ -1,11 +1,11 @@
-package com.kotlin.mvvm.repository.db
+package com.kotlin.mvvm.repository.db.news
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.kotlin.mvvm.repository.model.NewsArticles
+import com.kotlin.mvvm.repository.model.news.NewsArticles
 
 /**
  * Created by Waheed on 04,November,2019

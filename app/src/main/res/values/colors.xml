@@ -2,6 +2,7 @@
 <resources>
     <!-- Brand color -->
     <color name="colorPrimary">#121258</color>
+    <color name="countryNameBackgroundLight">#C6F3F3F3</color>
     <color name="colorPrimaryDark">#0F0F4A</color>
     <color name="colorAccent">#FFC039</color>
 

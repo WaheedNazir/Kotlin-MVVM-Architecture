@@ -8,7 +8,8 @@ import com.kotlin.mvvm.app.App
 import com.kotlin.mvvm.repository.api.ApiServices
 import com.kotlin.mvvm.repository.api.network.LiveDataCallAdapterFactoryForRetrofit
 import com.kotlin.mvvm.repository.db.AppDatabase
-import com.kotlin.mvvm.repository.db.NewsArticlesDao
+import com.kotlin.mvvm.repository.db.countries.CountriesDao
+import com.kotlin.mvvm.repository.db.news.NewsArticlesDao
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -62,6 +63,15 @@ class AppModule {
     @Provides
     fun provideUserDao(db: AppDatabase): NewsArticlesDao {
         return db.newsArticlesDao()
+    }
+
+    /**
+     * Provides CountriesDao an object to access Countries table from Database
+     */
+    @Singleton
+    @Provides
+    fun provideCountriesDao(db: AppDatabase): CountriesDao {
+        return db.countriesDao()
     }
 
 

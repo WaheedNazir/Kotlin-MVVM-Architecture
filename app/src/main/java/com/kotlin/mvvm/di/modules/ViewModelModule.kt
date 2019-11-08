@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.kotlin.mvvm.di.base.ViewModelFactory
 import com.kotlin.mvvm.di.base.ViewModelKey
+import com.kotlin.mvvm.ui.countryListing.CountriesViewModel
 import com.kotlin.mvvm.ui.newsArticles.NewsArticleViewModel
 import dagger.Binds
 import dagger.Module
@@ -24,6 +25,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(NewsArticleViewModel::class)
     abstract fun bindNewsArticleViewModel(newsArticleViewModel: NewsArticleViewModel): ViewModel
+
+    /**
+     * Countries List View Model
+     */
+    @Binds
+    @IntoMap
+    @ViewModelKey(CountriesViewModel::class)
+    abstract fun bindCountriesViewModel(countriesViewModel: CountriesViewModel): ViewModel
 
     /**
      * Binds ViewModels factory to provide ViewModels.
