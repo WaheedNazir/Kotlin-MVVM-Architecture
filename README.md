@@ -81,9 +81,9 @@ A sample app that display list of Google news. The purpose of this project to il
 
 ### Other samples of MVVM using Kotlin
 
-* [View-ViewModel-Interaction] - Sample of View and ViewModel Interaction/Communication.
-* [Communication-ActivityFragment-ViewModel] - Sample of communication between Activity and Fragment using ViewModel
-* [ViewModel-ViewModel-Communication] - Sample of communication between Activity and Fragment using ViewModel
+* [View-ViewModel-Interaction] - Sample shows View and ViewModel Interaction/Communication.
+* [Communication-ActivityFragment-ViewModel] - Sample shows communication between Activity and Fragment using ViewModel
+* [ViewModel-ViewModel-Communication] - Sample shows communication between ViewModels
 * [Kotlin-MVVM-Architecture] - Sample of complete MVVM Architecture using Dagger2, Kotlin, MediatorLiveData, Retrofit etc.
 
    [Kotlin-MVVM-Architecture]: <https://github.com/WaheedNazir/Kotlin-MVVM-Architecture>
