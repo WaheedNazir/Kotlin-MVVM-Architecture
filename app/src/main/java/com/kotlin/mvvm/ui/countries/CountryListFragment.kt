@@ -1,4 +1,4 @@
-package com.kotlin.mvvm.ui.countryListing
+package com.kotlin.mvvm.ui.countries
 
 import android.content.Context
 import android.os.Bundle

@@ -26,7 +26,7 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class NewsRepositoryUsingBoundResources @Inject constructor(
+class NewsRepository @Inject constructor(
     private val newsDao: NewsArticlesDao,
     private val apiServices: ApiServices, private val context: Context,
     private val appExecutors: AppExecutors = AppExecutors()

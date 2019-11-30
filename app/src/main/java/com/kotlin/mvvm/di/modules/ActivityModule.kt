@@ -1,7 +1,7 @@
 package com.kotlin.mvvm.di.modules
 
-import com.kotlin.mvvm.ui.countryListing.CountryListingActivity
-import com.kotlin.mvvm.ui.newsArticles.NewsArticlesActivity
+import com.kotlin.mvvm.ui.countries.CountryListingActivity
+import com.kotlin.mvvm.ui.news.NewsArticlesActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

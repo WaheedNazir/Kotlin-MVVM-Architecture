@@ -16,20 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ui.newsArticles.NewsArticlesActivity">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
-        <activity android:name=".ui.countryListing.CountryListingActivity">
+        <activity
+            android:name=".ui.countries.CountryListingActivity"
+            android:label="@string/countries">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.news.NewsArticlesActivity"
+            android:label="@string/news" />
     </application>
 
 </manifest>

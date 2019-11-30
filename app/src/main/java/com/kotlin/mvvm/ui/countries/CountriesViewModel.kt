@@ -1,4 +1,4 @@
-package com.kotlin.mvvm.ui.countryListing
+package com.kotlin.mvvm.ui.countries
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -22,7 +22,5 @@ class CountriesViewModel @Inject constructor(
      */
     private var countries: LiveData<List<Country>> = countriesRepository.getCountries()
 
-
     fun getCountries() = countries
-
 }

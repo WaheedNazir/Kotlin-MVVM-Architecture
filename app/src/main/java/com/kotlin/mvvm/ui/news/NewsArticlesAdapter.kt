@@ -1,4 +1,4 @@
-package com.kotlin.mvvm.ui.newsArticles
+package com.kotlin.mvvm.ui.news
 
 import android.view.View
 import android.view.ViewGroup
@@ -53,12 +53,9 @@ class NewsArticlesAdapter(
          * Binds the UI with the data and handles clicks
          */
         fun bind(newsArticle: NewsArticles, listener: (NewsArticles) -> Unit) = with(itemView) {
-            //news_title.text = newsArticle.title
-            //news_description.text = newsArticle.description
             tvNewsItemTitle.text = newsArticle.title
             tvNewsAuthor.text = newsArticle.author
             //TODO: need to format date
-            //tvListItemDateTime.text = getFormattedDate(newsArticle.publishedAt)
             tvListItemDateTime.text = newsArticle.publishedAt
 
             Glide.with(context)

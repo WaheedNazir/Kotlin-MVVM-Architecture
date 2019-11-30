@@ -1,25 +1,23 @@
-package com.kotlin.mvvm.ui.countryListing
+package com.kotlin.mvvm.ui.countries
+
 
 import android.net.Uri
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.repository.model.countries.Country
-
-
-import com.kotlin.mvvm.ui.countryListing.CountryListFragment.OnCountriesListClickListener
-
+import com.kotlin.mvvm.ui.countries.CountryListFragment.OnCountriesListClickListener
 import kotlinx.android.synthetic.main.row_country_list.view.*
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
+ * [RecyclerView.Adapter] that can display a [Country] and makes a call to the
  * specified [OnCountriesListClickListener].
  * TODO: Replace the implementation with code for your data type.
  */

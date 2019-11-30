@@ -7,5 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.kotlin.mvvm.ui.countryListing.CountryListFragment"
+    tools:context="com.kotlin.mvvm.ui.countries.CountryListFragment"
     tools:listitem="@layout/item_country_list" />

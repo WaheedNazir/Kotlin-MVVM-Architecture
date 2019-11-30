@@ -1,7 +1,5 @@
-package com.kotlin.mvvm.ui.newsArticles
+package com.kotlin.mvvm.ui.news
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kotlin.mvvm.R
@@ -29,7 +27,12 @@ class NewsArticlesActivity : BaseActivity() {
         val KEY_COUNTRY_SHORT_KEY: String = "COUNTRY_SHORT_KEY"
     }
 
-    private val newsArticleViewModel by lazy { getViewModel<NewsArticleViewModel>() }
+
+    private lateinit var adapter: NewsArticlesAdapter
+
+    private val newsArticleViewModel by lazy {
+        getViewModel<NewsArticleViewModel>()
+    }
 
     /**
      * On Create Of Activity
@@ -41,34 +44,13 @@ class NewsArticlesActivity : BaseActivity() {
         news_list.setEmptyView(empty_view)
         news_list.setProgressView(progress_view)
 
-        val adapter = NewsArticlesAdapter {
+        adapter = NewsArticlesAdapter {
             toast(it.description.toString())
         }
         news_list.adapter = adapter
         news_list.layoutManager = LinearLayoutManager(this)
 
-
-        //intent.getStringExtra(KEY_COUNTRY_SHORT_KEY)
-        /*
-        * Observing for data change, Cater DB and Network Both
-        * */
-        newsArticleViewModel.getNewsArticles().observe(this) {
-            when {
-                it.status.isLoading() -> {
-                    news_list.showProgressView()
-                }
-                it.status.isSuccessful() -> {
-                    it.load(news_list) {
-                        // Update the UI as the data has changed
-                        it?.let { adapter.replaceItems(it) }
-                    }
-                }
-                it.status.isError() -> {
-                    if (it.errorMessage != null)
-                        ToastUtil.showCustomToast(this, it.errorMessage.toString())
-                }
-            }
-        }
+        getNewsOfCountry(intent.getStringExtra(KEY_COUNTRY_SHORT_KEY))
 
         /**
          * View model getting API response from server using Network Bound Resource Only
@@ -95,11 +77,31 @@ class NewsArticlesActivity : BaseActivity() {
             ToastUtil.showCustomToast(this, "No Internet Connection")
         }*/
 
+    }
 
-        /**
-         * View model getting API response from Server/DB using Executor*/
-        /*newsArticleViewModel.getNewsArticlesFromServerUsingExecuter().observe(this, observer = {
-            adapter.replaceItems(it)
-        })*/
+    /**
+     * Get country news using Network & DB Bound Resource
+     */
+    private fun getNewsOfCountry(countryKey: String) {
+        /*
+        * Observing for data change, Cater DB and Network Both
+        * */
+        newsArticleViewModel.getNewsArticles(countryKey).observe(this) {
+            when {
+                it.status.isLoading() -> {
+                    news_list.showProgressView()
+                }
+                it.status.isSuccessful() -> {
+                    it.load(news_list) {
+                        // Update the UI as the data has changed
+                        it?.let { adapter.replaceItems(it) }
+                    }
+                }
+                it.status.isError() -> {
+                    if (it.errorMessage != null)
+                        ToastUtil.showCustomToast(this, it.errorMessage.toString())
+                }
+            }
+        }
     }
 }

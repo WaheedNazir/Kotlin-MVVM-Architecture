@@ -1,8 +1,5 @@
 package com.kotlin.mvvm.utils
 
-import android.content.Context
-import android.net.ConnectivityManager
-
 /**
  * Created by Waheed on 08,November,2019
  */
@@ -14,7 +11,7 @@ object CountryNameMapping {
 
     fun getCountryKey(country: String): String {
 
-        val hashMap: HashMap<String, String> = HashMap<String, String>()
+        val hashMap: HashMap<String, String> = HashMap()
 
         hashMap.put("Argentina.png", "ar")
         hashMap.put("Australia.png", "au")

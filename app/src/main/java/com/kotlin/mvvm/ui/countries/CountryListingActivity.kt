@@ -1,13 +1,12 @@
-package com.kotlin.mvvm.ui.countryListing
+package com.kotlin.mvvm.ui.countries
 
 import android.content.Intent
 import android.os.Bundle
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.repository.model.countries.Country
 import com.kotlin.mvvm.ui.BaseActivity
-import com.kotlin.mvvm.ui.newsArticles.NewsArticlesActivity
-import com.kotlin.mvvm.ui.newsArticles.NewsArticlesActivity.Companion.KEY_COUNTRY_SHORT_KEY
-import com.kotlin.mvvm.utils.ToastUtil
+import com.kotlin.mvvm.ui.news.NewsArticlesActivity
+import com.kotlin.mvvm.ui.news.NewsArticlesActivity.Companion.KEY_COUNTRY_SHORT_KEY
 
 /**
  * Created by Waheed on 08,November,2019

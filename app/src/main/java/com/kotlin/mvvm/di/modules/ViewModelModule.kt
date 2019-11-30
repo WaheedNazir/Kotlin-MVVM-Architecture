@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.kotlin.mvvm.di.base.ViewModelFactory
 import com.kotlin.mvvm.di.base.ViewModelKey
-import com.kotlin.mvvm.ui.countryListing.CountriesViewModel
-import com.kotlin.mvvm.ui.newsArticles.NewsArticleViewModel
+import com.kotlin.mvvm.ui.countries.CountriesViewModel
+import com.kotlin.mvvm.ui.news.NewsArticleViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

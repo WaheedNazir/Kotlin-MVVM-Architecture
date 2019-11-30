@@ -1,6 +1,6 @@
 package com.kotlin.mvvm.di.modules
 
-import com.kotlin.mvvm.ui.countryListing.CountryListFragment
+import com.kotlin.mvvm.ui.countries.CountryListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
