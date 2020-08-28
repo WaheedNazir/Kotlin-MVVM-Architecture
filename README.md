@@ -2,7 +2,7 @@
 
 A sample app that display list of Google news. The purpose of this project to illustrate the usage of MVVM architecture design pattern that follow the best practices of Object Oriented Design Patterns using the following technology stack.
 
- 1. Architeture Design Pattern
+ 1. Architecture Design Pattern
  2. MVVM
  2. Dagger2 (Dependency Injection)
  3. Live Data, MediatorLiveData
