@@ -88,7 +88,7 @@ class CountryListFragment : Fragment(), Injectable {
         if (context is OnCountriesListClickListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
         }
     }
 

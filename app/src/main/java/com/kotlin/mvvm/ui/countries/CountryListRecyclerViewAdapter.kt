@@ -45,7 +45,7 @@ class CountryListRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val country = mValues[position]
-        holder.tv_country_name.text = country.displayName
+        holder.countryName.text = country.displayName
 
         Glide.with(holder.mView.context)
             .load(Uri.parse(country.countryFagUrl))
@@ -56,7 +56,7 @@ class CountryListRecyclerViewAdapter(
                     .centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
             )
-            .into(holder.iv_country_image)
+            .into(holder.countryImage)
 
         with(holder.mView) {
             tag = country
@@ -66,12 +66,10 @@ class CountryListRecyclerViewAdapter(
 
     override fun getItemCount(): Int = mValues.size
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val iv_country_image: ImageView = mView.iv_country_image
-        val tv_country_name: TextView = mView.tv_country_name
+    class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+        val countryImage: ImageView = mView.iv_country_image
+        val countryName: TextView = mView.tv_country_name
 
-        override fun toString(): String {
-            return super.toString() + " '" + tv_country_name.text + "'"
-        }
+        override fun toString() = "${super.toString()} '${countryName.text}'"
     }
 }
