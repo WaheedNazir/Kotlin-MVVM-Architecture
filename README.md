@@ -92,6 +92,9 @@ A sample app that display list of Google news. The purpose of this project to il
    [ViewModel-ViewModel-Communication]: <https://github.com/WaheedNazir/ViewModel-ViewModel-Communication>
    [Communication-ActivityFragment-ViewModel]: <https://github.com/WaheedNazir/Communication-ActivityFragment-ViewModel>
    [LocationUpdates-LiveData-ViewModel]: <https://github.com/WaheedNazir/LocationUpdates-LiveData-ViewModel>
+
+   [Presentation Slides]: <https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/Presentation_WaheedNazir_FINAL.pdf>
+
    
 
 
