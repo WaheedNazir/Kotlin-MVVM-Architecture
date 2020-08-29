@@ -28,6 +28,8 @@ A sample app that display list of Google news. The purpose of this project to il
 # Mediator LiveData
 <img alt="MVVM Architecture" height="350px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Mediator_LiveData_Combined_These_Data_Sounrces.png" />
 
+# Presnetation slides
+<img alt="Presnetation slides" height="350px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/Presentation_WaheedNazir_FINAL.pdf" />
 
 ### Dependencies used
 
