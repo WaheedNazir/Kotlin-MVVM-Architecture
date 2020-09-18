@@ -1,7 +1,7 @@
 package com.kotlin.mvvm.di.modules
 
-import com.kotlin.mvvm.ui.countries.CountryListingActivity
-import com.kotlin.mvvm.ui.news.NewsArticlesActivity
+import com.kotlin.mvvm.ui.countries.CountriesActivity
+import com.kotlin.mvvm.ui.news.NewsActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -19,8 +19,8 @@ abstract class ActivityModule {
      * Marking Activities to be available to contributes for Android Injector
      */
     @ContributesAndroidInjector
-    abstract fun contributeNewsArticlesActivity(): NewsArticlesActivity
+    abstract fun contributeNewsArticlesActivity(): NewsActivity
 
     @ContributesAndroidInjector
-    abstract fun contributeCountryListingActivity(): CountryListingActivity
+    abstract fun contributeCountryListingActivity(): CountriesActivity
 }

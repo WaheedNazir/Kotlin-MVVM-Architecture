@@ -43,7 +43,7 @@ class CountriesRepository @Inject constructor(
      */
     private fun getCountriesDataFromAssets() {
 
-        val list: List<String> = context.assets.list("countries")!!.asList<String>()
+        val list: List<String> = context.assets.list("countries")?.asList<String>()!!
 
         val listOfCountries = ArrayList<Country>()
 
@@ -58,7 +58,7 @@ class CountriesRepository @Inject constructor(
         }
 
         appExecutors.diskIO().execute {
-            if (!listOfCountries.isEmpty()) {
+            if (listOfCountries.isNotEmpty()) {
                 countriesDao.deleteAllCountries()
                 countriesDao.insertCountries(listOfCountries)
             }
