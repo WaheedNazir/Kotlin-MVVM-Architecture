@@ -16,6 +16,8 @@ A sample app that display list of Google news. The purpose of this project to il
  11. Google News API
  12. JetPack Libraries
 
+### Demo
+<img height="400px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/sample_demo.gif" />
 
 ## Architecture
 <img alt="MVVM Architecture" height="700px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/Architecture_design_new.jpg" />
