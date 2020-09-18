@@ -8,8 +8,8 @@ import com.kotlin.mvvm.repository.api.ApiServices
 import com.kotlin.mvvm.repository.api.network.NetworkAndDBBoundResource
 import com.kotlin.mvvm.repository.api.network.NetworkResource
 import com.kotlin.mvvm.repository.api.network.Resource
-import com.kotlin.mvvm.repository.db.news.NewsArticlesDao
-import com.kotlin.mvvm.repository.model.news.NewsArticles
+import com.kotlin.mvvm.repository.db.news.NewsDao
+import com.kotlin.mvvm.repository.model.news.News
 import com.kotlin.mvvm.repository.model.news.NewsSource
 import com.kotlin.mvvm.utils.ConnectivityUtil
 import javax.inject.Inject
@@ -27,7 +27,7 @@ import javax.inject.Singleton
 
 @Singleton
 class NewsRepository @Inject constructor(
-    private val newsDao: NewsArticlesDao,
+    private val newsDao: NewsDao,
     private val apiServices: ApiServices, private val context: Context,
     private val appExecutors: AppExecutors = AppExecutors()
 ) {
@@ -36,21 +36,20 @@ class NewsRepository @Inject constructor(
      * Fetch the news articles from database if exist else fetch from web
      * and persist them in the database
      */
-    fun getNewsArticles(countryShortKey: String): LiveData<Resource<List<NewsArticles>?>> {
-
+    fun getNewsArticles(countryShortKey: String): LiveData<Resource<List<News>?>> {
         val data = HashMap<String, String>()
-        data.put("country", countryShortKey)
-        data.put("apiKey", BuildConfig.NEWS_API_KEY)
+        data["country"] = countryShortKey
+        data["apiKey"] = BuildConfig.NEWS_API_KEY
 
-        return object : NetworkAndDBBoundResource<List<NewsArticles>, NewsSource>(appExecutors) {
+        return object : NetworkAndDBBoundResource<List<News>, NewsSource>(appExecutors) {
             override fun saveCallResult(item: NewsSource) {
-                if (!item.articles.isEmpty()) {
+                if (item.articles.isNotEmpty()) {
                     newsDao.deleteAllArticles()
                     newsDao.insertArticles(item.articles)
                 }
             }
 
-            override fun shouldFetch(data: List<NewsArticles>?) =
+            override fun shouldFetch(data: List<News>?) =
                 (ConnectivityUtil.isConnected(context))
 
             override fun loadFromDb() = newsDao.getNewsArticles()
@@ -70,8 +69,8 @@ class NewsRepository @Inject constructor(
             LiveData<Resource<NewsSource>> {
 
         val data = HashMap<String, String>()
-        data.put("country", countryShortKey)
-        data.put("apiKey", BuildConfig.NEWS_API_KEY)
+        data["country"] = countryShortKey
+        data["apiKey"] = BuildConfig.NEWS_API_KEY
 
         return object : NetworkResource<NewsSource>() {
             override fun createCall(): LiveData<Resource<NewsSource>> {

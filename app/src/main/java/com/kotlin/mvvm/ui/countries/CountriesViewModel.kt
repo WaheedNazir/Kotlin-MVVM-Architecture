@@ -13,9 +13,8 @@ import javax.inject.Inject
 /**
  * A container for [Country] related data to show on the UI.
  */
-class CountriesViewModel @Inject constructor(
-    countriesRepository: CountriesRepository
-) : ViewModel() {
+class CountriesViewModel @Inject constructor(countriesRepository: CountriesRepository) :
+    ViewModel() {
 
     /**
      * Loading news articles from internet and database

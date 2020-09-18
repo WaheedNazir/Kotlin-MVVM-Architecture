@@ -22,8 +22,8 @@ import com.kotlin.mvvm.utils.ConnectivityUtil
  * @param <ResultType>
  * @param <RequestType>
 </RequestType></ResultType> */
-abstract class NetworkAndDBBoundResource<ResultType, RequestType> @MainThread constructor(private val appExecutors: AppExecutors) {
-
+abstract class NetworkAndDBBoundResource<ResultType, RequestType> @MainThread
+              constructor(private val appExecutors: AppExecutors) {
     /**
      * The final result LiveData
      */

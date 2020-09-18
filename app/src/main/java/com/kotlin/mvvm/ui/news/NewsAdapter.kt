@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.kotlin.mvvm.R
-import com.kotlin.mvvm.repository.model.news.NewsArticles
+import com.kotlin.mvvm.repository.model.news.News
 import com.kotlin.mvvm.utils.extensions.inflate
 import kotlinx.android.synthetic.main.row_news_article.view.*
 
@@ -18,14 +18,15 @@ import kotlinx.android.synthetic.main.row_news_article.view.*
 /**
  * The News adapter to show the news in a list.
  */
-class NewsArticlesAdapter(
-    private val listener: (NewsArticles) -> Unit
-) : RecyclerView.Adapter<NewsArticlesAdapter.NewsHolder>() {
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
 
     /**
      * List of news articles
      */
-    private var newsArticles: List<NewsArticles> = emptyList()
+    private var newsArticles: List<News> = emptyList()
+
+
+    var onNewsClicked: ((News) -> Unit)? = null
 
     /**
      * Inflate the view
@@ -37,7 +38,7 @@ class NewsArticlesAdapter(
      * Bind the view with the data
      */
     override fun onBindViewHolder(newsHolder: NewsHolder, position: Int) =
-        newsHolder.bind(newsArticles[position], listener)
+        newsHolder.bind(newsArticles[position])
 
     /**
      * Number of items in the list to display
@@ -47,12 +48,12 @@ class NewsArticlesAdapter(
     /**
      * View Holder Pattern
      */
-    class NewsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class NewsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         /**
          * Binds the UI with the data and handles clicks
          */
-        fun bind(newsArticle: NewsArticles, listener: (NewsArticles) -> Unit) = with(itemView) {
+        fun bind(newsArticle: News) = with(itemView) {
             tvNewsItemTitle.text = newsArticle.title
             tvNewsAuthor.text = newsArticle.author
             //TODO: need to format date
@@ -68,7 +69,9 @@ class NewsArticlesAdapter(
                 )
                 .into(ivNewsImage)
 
-            setOnClickListener { listener(newsArticle) }
+            itemView.setOnClickListener {
+                onNewsClicked?.invoke(newsArticle)
+            }
 
         }
     }
@@ -76,7 +79,7 @@ class NewsArticlesAdapter(
     /**
      * Swap function to set new data on updating
      */
-    fun replaceItems(items: List<NewsArticles>) {
+    fun replaceItems(items: List<News>) {
         newsArticles = items
         notifyDataSetChanged()
     }

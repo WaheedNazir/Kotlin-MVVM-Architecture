@@ -9,7 +9,7 @@ import com.kotlin.mvvm.repository.api.ApiServices
 import com.kotlin.mvvm.repository.api.network.LiveDataCallAdapterFactoryForRetrofit
 import com.kotlin.mvvm.repository.db.AppDatabase
 import com.kotlin.mvvm.repository.db.countries.CountriesDao
-import com.kotlin.mvvm.repository.db.news.NewsArticlesDao
+import com.kotlin.mvvm.repository.db.news.NewsDao
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -20,7 +20,7 @@ import javax.inject.Singleton
  * Created by Waheed on 04,November,2019
  */
 
-@Module(includes = [PrefrencesModule::class, ActivityModule::class, ViewModelModule::class])
+@Module(includes = [PreferencesModule::class, ActivityModule::class, ViewModelModule::class])
 class AppModule {
 
     /**
@@ -51,9 +51,9 @@ class AppModule {
      */
     @Singleton
     @Provides
-    fun provideDb(context: Context): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, "news-db").build()
-    }
+    fun provideDb(context: Context): AppDatabase =
+        Room.databaseBuilder(context, AppDatabase::class.java, "news-db")
+            .fallbackToDestructiveMigration().build()
 
 
     /**
@@ -61,18 +61,14 @@ class AppModule {
      */
     @Singleton
     @Provides
-    fun provideUserDao(db: AppDatabase): NewsArticlesDao {
-        return db.newsArticlesDao()
-    }
+    fun provideUserDao(db: AppDatabase): NewsDao = db.newsArticlesDao()
 
     /**
      * Provides CountriesDao an object to access Countries table from Database
      */
     @Singleton
     @Provides
-    fun provideCountriesDao(db: AppDatabase): CountriesDao {
-        return db.countriesDao()
-    }
+    fun provideCountriesDao(db: AppDatabase): CountriesDao = db.countriesDao()
 
 
     /**
@@ -80,9 +76,7 @@ class AppModule {
      */
     @Singleton
     @Provides
-    fun provideContext(application: App): Context {
-        return application.applicationContext
-    }
+    fun provideContext(application: App): Context = application.applicationContext
 
 
     /**

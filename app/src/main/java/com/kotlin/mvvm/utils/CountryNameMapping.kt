@@ -13,60 +13,60 @@ object CountryNameMapping {
 
         val hashMap: HashMap<String, String> = HashMap()
 
-        hashMap.put("Argentina.png", "ar")
-        hashMap.put("Australia.png", "au")
-        hashMap.put("Austria.png", "at")
-        hashMap.put("Belgium.png", "be")
-        hashMap.put("Brazil.png", "br")
-        hashMap.put("Bulgaria.png", "bg")
-        hashMap.put("Canada.png", "ca")
-        hashMap.put("China.png", "cn")
-        hashMap.put("Colombia.png", "co")
-        hashMap.put("Cuba.png", "cu")
-        hashMap.put("Czech_Republic.png", "cz")
-        hashMap.put("Egypt.png", "eg")
-        hashMap.put("France.png", "fr")
-        hashMap.put("Germany.png", "de")
-        hashMap.put("Greece.png", "gr")
-        hashMap.put("Hong_Kong.png", "hk")
-        hashMap.put("Hungary.png", "hu")
-        hashMap.put("India.png", "in")
-        hashMap.put("Indonesia.png", "id")
-        hashMap.put("Ireland.png", "ie")
-        hashMap.put("Israel.png", "il")
-        hashMap.put("Italy.png", "it")
-        hashMap.put("Japan.png", "jp")
-        hashMap.put("Latvia.png", "lv")
-        hashMap.put("Lithuania.png", "lt")
-        hashMap.put("Malaysia.png", "my")
-        hashMap.put("Mexico.png", "mx")
-        hashMap.put("Morocco.png", "ma")
-        hashMap.put("Netherlands.png", "nl")
-        hashMap.put("New_Zealand.png", "nz")
-        hashMap.put("Nigeria.png", "ng")
-        hashMap.put("Norway.png", "no")
-        hashMap.put("Philippines.png", "ph")
-        hashMap.put("Poland.png", "pl")
-        hashMap.put("Portugal.png", "pt")
-        hashMap.put("Romania.png", "ro")
-        hashMap.put("Russia.png", "ru")
-        hashMap.put("Saudi_Arabia.png", "sa")
-        hashMap.put("Serbia.png", "rs")
-        hashMap.put("Singapore.png", "sg")
-        hashMap.put("Slovakia.png", "sk")
-        hashMap.put("Slovenia.png", "si")
-        hashMap.put("South_Africa.png", "za")
-        hashMap.put("South_Korea.png", "kr")
-        hashMap.put("Sweden.png", "se")
-        hashMap.put("Switzerland.png", "ch")
-        hashMap.put("Taiwan.png", "tw")
-        hashMap.put("Thailand.png", "th")
-        hashMap.put("Turkey.png", "tr")
-        hashMap.put("UAE.png", "ae")
-        hashMap.put("Ukraine.png", "ua")
-        hashMap.put("United_Kingdom.png", "gb")
-        hashMap.put("United_States_of_America.png", "us")
-        hashMap.put("Venezuela.png", "ve")
+        hashMap["Argentina.png"] = "ar"
+        hashMap["Australia.png"] = "au"
+        hashMap["Austria.png"] = "at"
+        hashMap["Belgium.png"] = "be"
+        hashMap["Brazil.png"] = "br"
+        hashMap["Bulgaria.png"] = "bg"
+        hashMap["Canada.png"] = "ca"
+        hashMap["China.png"] = "cn"
+        hashMap["Colombia.png"] = "co"
+        hashMap["Cuba.png"] = "cu"
+        hashMap["Czech_Republic.png"] = "cz"
+        hashMap["Egypt.png"] = "eg"
+        hashMap["France.png"] = "fr"
+        hashMap["Germany.png"] = "de"
+        hashMap["Greece.png"] = "gr"
+        hashMap["Hong_Kong.png"] = "hk"
+        hashMap["Hungary.png"] = "hu"
+        hashMap["India.png"] = "in"
+        hashMap["Indonesia.png"] = "id"
+        hashMap["Ireland.png"] = "ie"
+        hashMap["Israel.png"] = "il"
+        hashMap["Italy.png"] = "it"
+        hashMap["Japan.png"] = "jp"
+        hashMap["Latvia.png"] = "lv"
+        hashMap["Lithuania.png"] = "lt"
+        hashMap["Malaysia.png"] = "my"
+        hashMap["Mexico.png"] = "mx"
+        hashMap["Morocco.png"] = "ma"
+        hashMap["Netherlands.png"] = "nl"
+        hashMap["New_Zealand.png"] = "nz"
+        hashMap["Nigeria.png"] = "ng"
+        hashMap["Norway.png"] = "no"
+        hashMap["Philippines.png"] = "ph"
+        hashMap["Poland.png"] = "pl"
+        hashMap["Portugal.png"] = "pt"
+        hashMap["Romania.png"] = "ro"
+        hashMap["Russia.png"] = "ru"
+        hashMap["Saudi_Arabia.png"] = "sa"
+        hashMap["Serbia.png"] = "rs"
+        hashMap["Singapore.png"] = "sg"
+        hashMap["Slovakia.png"] = "sk"
+        hashMap["Slovenia.png"] = "si"
+        hashMap["South_Africa.png"] = "za"
+        hashMap["South_Korea.png"] = "kr"
+        hashMap["Sweden.png"] = "se"
+        hashMap["Switzerland.png"] = "ch"
+        hashMap["Taiwan.png"] = "tw"
+        hashMap["Thailand.png"] = "th"
+        hashMap["Turkey.png"] = "tr"
+        hashMap["UAE.png"] = "ae"
+        hashMap["Ukraine.png"] = "ua"
+        hashMap["United_Kingdom.png"] = "gb"
+        hashMap["United_States_of_America.png"] = "us"
+        hashMap["Venezuela.png"] = "ve"
 
         /**
          * Return value for the country key otherwise return US as a default country

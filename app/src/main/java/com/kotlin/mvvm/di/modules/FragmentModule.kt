@@ -1,6 +1,6 @@
 package com.kotlin.mvvm.di.modules
 
-import com.kotlin.mvvm.ui.countries.CountryListFragment
+import com.kotlin.mvvm.ui.countries.CountriesFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -12,5 +12,5 @@ abstract class FragmentModule {
      * Injecting Fragments
      */
     @ContributesAndroidInjector
-    internal abstract fun contributeCountryListFragment(): CountryListFragment
+    internal abstract fun contributeCountryListFragment(): CountriesFragment
 }

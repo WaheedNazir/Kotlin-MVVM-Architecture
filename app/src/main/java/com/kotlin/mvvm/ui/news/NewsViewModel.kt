@@ -3,7 +3,7 @@ package com.kotlin.mvvm.ui.news
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.kotlin.mvvm.repository.api.network.Resource
-import com.kotlin.mvvm.repository.model.news.NewsArticles
+import com.kotlin.mvvm.repository.model.news.News
 import com.kotlin.mvvm.repository.repo.news.NewsRepository
 import javax.inject.Inject
 
@@ -12,17 +12,18 @@ import javax.inject.Inject
  */
 
 /**
- * A container for [NewsArticles] related data to show on the UI.
+ * A container for [News] related data to show on the UI.
  */
-class NewsArticleViewModel @Inject constructor(
+class NewsViewModel @Inject constructor(
     private val newsRepository: NewsRepository
 ) : ViewModel() {
 
     /**
      * Loading news articles from internet and database
      */
-    private fun newsArticles(countryKey: String): LiveData<Resource<List<NewsArticles>?>> =
+    private fun newsArticles(countryKey: String): LiveData<Resource<List<News>?>> =
         newsRepository.getNewsArticles(countryKey)
+
 
     fun getNewsArticles(countryKey: String) = newsArticles(countryKey)
 
