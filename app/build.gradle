@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0.0"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "NEWS_API_KEY", credentialProperty['NEWS_API_KEY'])
         buildConfigField("String", "BASE_URL", credentialProperty['BASE_URL'])
@@ -35,6 +36,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
@@ -46,7 +50,6 @@ dependencies {
     // Support Libraries
     implementation 'com.android.support:design:28.0.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -54,10 +57,11 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
     testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 
-    // Lifecycle (ViewModel + LiveData)
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
-    implementation "android.arch.core:core-testing:$lifecycleVersion"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.fragment:fragment-ktx:1.2.5'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
 
     // Room
     implementation "androidx.room:room-runtime:$roomVersion"
@@ -74,6 +78,7 @@ dependencies {
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    implementation 'com.android.support:multidex:1.0.3'
 
     //RxJava
     /*RxJava lib*/
