@@ -38,6 +38,7 @@ fun Activity.startActivityNewTask(clazz: Class<*>) {
     startActivity(intent)
 }
 
+@Suppress("DEPRECATION")
 fun Activity.isConnectedInternet(): Boolean {
     val connectivityManager =
         this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?

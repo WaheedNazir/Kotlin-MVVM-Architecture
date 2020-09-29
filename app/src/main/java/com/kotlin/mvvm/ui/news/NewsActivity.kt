@@ -1,14 +1,13 @@
 package com.kotlin.mvvm.ui.news
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.ui.BaseActivity
 import com.kotlin.mvvm.utils.ToastUtil
-import com.kotlin.mvvm.utils.extensions.getViewModel
 import com.kotlin.mvvm.utils.extensions.load
-import com.kotlin.mvvm.utils.extensions.toast
 import kotlinx.android.synthetic.main.activity_news_articles.*
 import kotlinx.android.synthetic.main.empty_layout_news_article.*
 import kotlinx.android.synthetic.main.progress_layout_news_article.*
@@ -24,11 +23,10 @@ class NewsActivity : BaseActivity() {
         val KEY_COUNTRY_SHORT_KEY: String = "COUNTRY_SHORT_KEY"
     }
 
-
     private lateinit var adapter: NewsAdapter
 
-    private val newsArticleViewModel by lazy {
-        getViewModel<NewsViewModel>()
+    private val newsArticleViewModel: NewsViewModel by viewModels {
+        viewModelFactory
     }
 
     /**
@@ -49,7 +47,7 @@ class NewsActivity : BaseActivity() {
         news_list.adapter = adapter
         news_list.layoutManager = LinearLayoutManager(this)
 
-        getNewsOfCountry(intent.getStringExtra(KEY_COUNTRY_SHORT_KEY))
+        getNewsOfCountry(intent?.getStringExtra(KEY_COUNTRY_SHORT_KEY)!!)
     }
 
     /**

@@ -46,6 +46,7 @@ fun ViewGroup.inflate(layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, false)
 }
 
+@Suppress("DEPRECATION")
 fun Context.getDrawableCompat(@DrawableRes resId: Int, @ColorRes tintColorRes: Int = 0) = when {
     tintColorRes != 0 -> AppCompatResources.getDrawable(this, resId)?.apply {
         setColorFilter(getColorCompat(tintColorRes), PorterDuff.Mode.SRC_ATOP)

@@ -10,6 +10,7 @@ import androidx.core.app.ShareCompat
  * Created by Waheed on 04,November,2019
  */
 
+
 fun intentShareText(activity: Activity, text: String) {
     val shareIntent = ShareCompat.IntentBuilder.from(activity)
         .setText(text)
@@ -22,7 +23,8 @@ fun intentShareText(activity: Activity, text: String) {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             } else {
                 // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP)
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
             }
         }
     activity.startActivity(shareIntent)
