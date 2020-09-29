@@ -1,29 +1,17 @@
 package com.kotlin.mvvm.app
 
-import android.app.Activity
-import android.app.Application
-import com.kotlin.mvvm.di.base.AppInjector
+import com.kotlin.mvvm.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
+import dagger.android.support.DaggerApplication
 
 /**
  * Created by Waheed on 04,November,2019
  */
 
-class App : Application(), HasActivityInjector {
+class App : DaggerApplication() {
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    private val applicationInjector = DaggerAppComponent.builder().application(this).build()
 
-    override fun onCreate() {
-        super.onCreate()
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> = applicationInjector
 
-        AppInjector.init(this)
-    }
-
-    override fun activityInjector(): AndroidInjector<Activity> {
-        return dispatchingAndroidInjector
-    }
 }
