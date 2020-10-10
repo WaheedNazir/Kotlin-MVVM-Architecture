@@ -23,7 +23,7 @@ import com.kotlin.mvvm.utils.ConnectivityUtil
  * @param <RequestType>
 </RequestType></ResultType> */
 abstract class NetworkAndDBBoundResource<ResultType, RequestType> @MainThread
-              constructor(private val appExecutors: AppExecutors) {
+constructor(private val appExecutors: AppExecutors) {
     /**
      * The final result LiveData
      */
@@ -39,13 +39,13 @@ abstract class NetworkAndDBBoundResource<ResultType, RequestType> @MainThread
 
             result.removeSource(dbSource) // Once done data loading remove source
 
-            if (shouldFetch(data)) {
-
-                fetchFromNetwork(dbSource)
-
-            } else {
-
-                result.addSource(dbSource) { newData -> setValue(Resource.success(newData)) }
+            when {
+                shouldFetch(data) -> fetchFromNetwork(dbSource)
+                else -> {
+                    result.addSource(dbSource) { newData ->
+                        setValue(Resource.success(newData))
+                    }
+                }
             }
         }
     }
@@ -66,25 +66,27 @@ abstract class NetworkAndDBBoundResource<ResultType, RequestType> @MainThread
             result.removeSource(apiResponse)
 
             response?.apply {
-                if (status.isSuccessful()) {
-                    appExecutors.diskIO().execute {
+                when {
+                    status.isSuccessful() -> {
+                        appExecutors.diskIO().execute {
 
-                        processResponse(this)?.let { requestType ->
-                            saveCallResult(requestType)
-                        }
-                        appExecutors.mainThread().execute {
-                            // we specially request a new live data,
-                            // otherwise we will get immediately last cached value,
-                            // which may not be updated with latest results received from network.
-                            result.addSource(loadFromDb()) { newData ->
-                                setValue(Resource.success(newData))
+                            processResponse(this)?.let { requestType ->
+                                saveCallResult(requestType)
+                            }
+                            appExecutors.mainThread().execute {
+                                // we specially request a new live data,
+                                // otherwise we will get immediately last cached value,
+                                // which may not be updated with latest results received from network.
+                                result.addSource(loadFromDb()) { newData ->
+                                    setValue(Resource.success(newData))
+                                }
                             }
                         }
                     }
-                } else {
-                    onFetchFailed()
-                    result.addSource(dbSource) {
-                        result.setValue(Resource.error(errorMessage))
+                    else -> {
+                        result.addSource(dbSource) {
+                            result.setValue(Resource.error(errorMessage))
+                        }
                     }
                 }
             }
@@ -96,16 +98,11 @@ abstract class NetworkAndDBBoundResource<ResultType, RequestType> @MainThread
         if (result.value != newValue) result.value = newValue
     }
 
-    protected fun onFetchFailed() {}
 
-    fun asLiveData(): LiveData<Resource<ResultType?>> {
-        return result
-    }
+    fun asLiveData(): LiveData<Resource<ResultType?>> = result
 
     @WorkerThread
-    private fun processResponse(response: Resource<RequestType>): RequestType? {
-        return response.data
-    }
+    private fun processResponse(response: Resource<RequestType>): RequestType? = response.data
 
     @WorkerThread
     protected abstract fun saveCallResult(item: RequestType)

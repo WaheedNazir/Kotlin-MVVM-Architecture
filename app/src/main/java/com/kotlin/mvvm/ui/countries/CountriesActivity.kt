@@ -7,7 +7,7 @@ import com.kotlin.mvvm.ui.BaseActivity
 /**
  * Created by Waheed on 08,November,2019
  */
-class CountriesActivity() : BaseActivity() {
+class CountriesActivity : BaseActivity() {
 
     /**
      */

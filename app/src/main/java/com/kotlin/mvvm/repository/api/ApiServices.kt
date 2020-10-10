@@ -29,12 +29,4 @@ interface ApiServices {
     @GET("top-headlines")
     fun getNewsSource(@QueryMap options: Map<String, String>): LiveData<Resource<NewsSource>>
 
-
-    /**
-     * Fetch news articles from Google news using GET API Call on given Url
-     * Using Call, By Retrofit
-     */
-    @GET("top-headlines?sources=google-news&apiKey=" + BuildConfig.NEWS_API_KEY)
-    fun getNewsSourceUsingCall(): Call<NewsSource>
-
 }

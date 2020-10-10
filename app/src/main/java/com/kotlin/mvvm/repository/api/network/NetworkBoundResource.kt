@@ -38,26 +38,19 @@ abstract class NetworkResource<RequestType> @MainThread constructor() {
         val apiResponse = createCall()
         // Make the network call
         result.addSource(apiResponse) { response ->
-
             result.removeSource(apiResponse)
             // Dispatch the result
             response?.apply {
                 when {
-                    // Can be done with if statement if status is successful set this otherwise set error message
-                    status.isSuccessful() -> {
-                        setValue(this)
-                    }
-                    else -> {
-                        setValue(Resource.error(errorMessage))
-                    }
+                    status.isSuccessful() -> setValue(this)
+                    else -> setValue(Resource.error(errorMessage))
                 }
             }
         }
     }
 
-    fun asLiveData(): LiveData<Resource<RequestType>> {
-        return result
-    }
+    fun asLiveData(): LiveData<Resource<RequestType>> = result
+
 
     @MainThread
     private fun setValue(newValue: Resource<RequestType>) {
