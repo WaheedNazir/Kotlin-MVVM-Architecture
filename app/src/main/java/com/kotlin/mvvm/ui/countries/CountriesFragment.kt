@@ -119,9 +119,11 @@ class CountriesFragment : DaggerFragment() {
     private fun observeCountries() {
         countriesViewModel.getCountries().observe(viewLifecycleOwner, Observer {
             // You'l get list of countries here
-            listOfCountries.clear()
-            listOfCountries.addAll(it)
-            countriesAdapter.notifyDataSetChanged()
+            it?.let {
+                listOfCountries.clear()
+                listOfCountries.addAll(it)
+                countriesAdapter.notifyDataSetChanged()
+            }
         })
     }
 }
