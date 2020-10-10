@@ -15,23 +15,23 @@ import com.kotlin.mvvm.repository.model.countries.Country
  * Abstracts access to the countries database
  */
 @Dao
-interface CountriesDao {
+abstract class CountriesDao {
 
     /**
      * Insert countries into the database
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCountries(countries: List<Country>): List<Long>
+    abstract suspend fun insertCountries(countries: List<Country>)
 
     /**
      * Get all countries from database
      */
     @Query("SELECT * FROM countries_table")
-    fun getCountries(): LiveData<List<Country>>
+    abstract suspend fun getCountries(): List<Country>
 
     /**
      * Delete all countries from database
      */
     @Query("DELETE FROM countries_table")
-    abstract fun deleteAllCountries()
+    abstract suspend fun deleteAllCountries()
 }
