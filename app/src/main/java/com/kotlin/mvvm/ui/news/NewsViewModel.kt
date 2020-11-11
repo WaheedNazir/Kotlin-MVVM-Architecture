@@ -1,10 +1,15 @@
 package com.kotlin.mvvm.ui.news
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.kotlin.mvvm.repository.api.network.Resource
+import com.kotlin.mvvm.repository.model.countries.Country
 import com.kotlin.mvvm.repository.model.news.News
+import com.kotlin.mvvm.repository.model.news.NewsSource
 import com.kotlin.mvvm.repository.repo.news.NewsRepository
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -21,18 +26,25 @@ class NewsViewModel @Inject constructor(
     /**
      * Loading news articles from internet and database
      */
-    private fun newsArticles(countryKey: String): LiveData<Resource<List<News>?>> =
-        newsRepository.getNewsArticles(countryKey)
+
+    private var news: LiveData<Resource<List<News>>> = MutableLiveData()
+
+    fun getNewsArticles(countryKey: String): LiveData<Resource<List<News>>> {
+        viewModelScope.launch {
+            val result = newsRepository.getNewsArticles(countryKey)
+            news = result
+        }
+        return news
+    }
 
 
-    fun getNewsArticles(countryKey: String) = newsArticles(countryKey)
+    private var newsWithOutDb: LiveData<Resource<NewsSource>> = MutableLiveData()
 
-    /**
-     * Loading news articles from internet only
-     */
-    private fun newsArticlesFromOnlyServer(countryKey: String) =
-        newsRepository.getNewsArticlesFromServerOnly(countryKey)
-
-    fun getNewsArticlesFromServer(countryKey: String) = newsArticlesFromOnlyServer(countryKey)
-
+    fun getNewArticlesWithoutDB(countryKey: String): LiveData<Resource<NewsSource>> {
+        viewModelScope.launch {
+            val result = newsRepository.getNewsArticlesFromServerOnly(countryKey)
+            newsWithOutDb = result
+        }
+        return newsWithOutDb
+    }
 }

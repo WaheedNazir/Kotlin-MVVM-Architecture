@@ -55,14 +55,31 @@ class NewsActivity : BaseActivity() {
      * Observing for data change from DB and Network Both
      */
     private fun getNewsOfCountry(countryKey: String) {
-        newsArticleViewModel.getNewsArticles(countryKey).observe(this, Observer {
+        /*newsArticleViewModel.getNewsArticles(countryKey).observe(this, Observer {
+            when {
+                it.status.isLoading() -> news_list.showProgressView()
+
+                it.status.isSuccessful() -> {
+                    it?.load(news_list) { news ->
+                        adapter.replaceItems(news!!)
+                    }
+                }
+                it.status.isError() -> {
+                    if (it.errorMessage != null)
+                        ToastUtil.showCustomToast(this, it.errorMessage.toString())
+                }
+            }
+        })*/
+
+        //Fetch news from server, Don't save into db.
+        newsArticleViewModel.getNewArticlesWithoutDB(countryKey).observe(this, Observer {
             when {
                 it.status.isLoading() -> {
                     news_list.showProgressView()
                 }
                 it.status.isSuccessful() -> {
                     it?.load(news_list) { news ->
-                        adapter.replaceItems(news!!)
+                        adapter.replaceItems(news?.articles!!)
                     }
                 }
                 it.status.isError() -> {

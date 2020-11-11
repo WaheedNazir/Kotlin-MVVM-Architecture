@@ -4,115 +4,75 @@ import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.kotlin.mvvm.app.AppExecutors
-import com.kotlin.mvvm.utils.ConnectivityUtil
-
+import kotlinx.coroutines.*
+import java.lang.Exception
+import kotlin.coroutines.coroutineContext
 
 /**
  * Created by Waheed on 04,November,2019
  */
 
 /**
- * A generic class that can provide a resource backed by both the sqlite database and the network.
- *
- *
- * You can read more about it in the [Architecture
+ * A generic class that can provide a resource backed by both the SQLite database and the network.
  * Guide](https://developer.android.com/arch).
- *
- * @param <ResultType>
- * @param <RequestType>
-</RequestType></ResultType> */
-abstract class NetworkAndDBBoundResource<ResultType, RequestType> @MainThread
-constructor(private val appExecutors: AppExecutors) {
+ */
+abstract class NetworkAndDBBoundResource<ResultType, RequestType> {
     /**
      * The final result LiveData
      */
-    private val result = MediatorLiveData<Resource<ResultType?>>()
+    private val result = MediatorLiveData<Resource<ResultType>>()
+    private val supervisorJob = SupervisorJob()
 
-    init {
-        // Send loading state to UI
-        result.value = Resource.loading()
-
-        val dbSource = this.loadFromDb()
-
-        result.addSource(dbSource) { data ->
-
-            result.removeSource(dbSource) // Once done data loading remove source
-
-            when {
-                shouldFetch(data) -> fetchFromNetwork(dbSource)
-                else -> {
-                    result.addSource(dbSource) { newData ->
-                        setValue(Resource.success(newData))
-                    }
+    suspend fun build(): NetworkAndDBBoundResource<ResultType, RequestType> {
+        withContext(Dispatchers.Main) {
+            // Send loading state to UI
+            result.value = Resource.loading()
+        }
+        CoroutineScope(coroutineContext).launch(supervisorJob) {
+            val dbResult = loadFromDb()
+            if (shouldFetch(dbResult)) {
+                try {
+                    fetchFromNetwork(dbResult)
+                } catch (e: Exception) {
+                    result.value = Resource.error("An error happened: $e")
                 }
+            } else {
+                //Return data from local database
+                setValue(Resource.success(dbResult))
             }
         }
+        return this
     }
 
-    /**
-     * Fetch the data from network and persist into DB and then
-     * send it back to UI.
-     */
-    private fun fetchFromNetwork(dbSource: LiveData<ResultType>) {
-        val apiResponse = createCall()
-        // we re-attach dbSource as a new source, it will dispatch its latest value quickly
-        result.addSource(dbSource) {
-            result.setValue(Resource.loading())
-        }
-
-        result.addSource(apiResponse) { response ->
-            result.removeSource(dbSource)
-            result.removeSource(apiResponse)
-
-            response?.apply {
-                when {
-                    status.isSuccessful() -> {
-                        appExecutors.diskIO().execute {
-
-                            processResponse(this)?.let { requestType ->
-                                saveCallResult(requestType)
-                            }
-                            appExecutors.mainThread().execute {
-                                // we specially request a new live data,
-                                // otherwise we will get immediately last cached value,
-                                // which may not be updated with latest results received from network.
-                                result.addSource(loadFromDb()) { newData ->
-                                    setValue(Resource.success(newData))
-                                }
-                            }
-                        }
-                    }
-                    else -> {
-                        result.addSource(dbSource) {
-                            result.setValue(Resource.error(errorMessage))
-                        }
-                    }
-                }
-            }
-        }
+    private suspend fun fetchFromNetwork(dbResult: ResultType) {
+        //Fetch data from network
+        setValue(Resource.success(dbResult)) // Dispatch latest value quickly (UX purpose)
+        val apiResponse = createCallAsync().await()
+        //Data fetched from network
+        saveCallResult(processResponse(apiResponse))
+        setValue(Resource.success(loadFromDb()))
     }
+
 
     @MainThread
-    private fun setValue(newValue: Resource<ResultType?>) {
+    private fun setValue(newValue: Resource<ResultType>) {
         if (result.value != newValue) result.value = newValue
     }
 
-
-    fun asLiveData(): LiveData<Resource<ResultType?>> = result
-
-    @WorkerThread
-    private fun processResponse(response: Resource<RequestType>): RequestType? = response.data
+    fun asLiveData() = result as LiveData<Resource<ResultType>>
 
     @WorkerThread
-    protected abstract fun saveCallResult(item: RequestType)
+    protected abstract fun processResponse(response: RequestType): ResultType
+
+    @WorkerThread
+    protected abstract suspend fun saveCallResult(item: RequestType)
 
     @MainThread
-    protected abstract fun shouldFetch(data: ResultType?): Boolean
+    protected abstract fun shouldFetch(data: ResultType): Boolean
 
     @MainThread
-    protected abstract fun loadFromDb(): LiveData<ResultType>
+    protected abstract suspend fun loadFromDb(): ResultType
 
     @MainThread
-    protected abstract fun createCall(): LiveData<Resource<RequestType>>
+    protected abstract fun createCallAsync(): Deferred<RequestType>
 }

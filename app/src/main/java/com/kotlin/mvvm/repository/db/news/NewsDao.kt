@@ -15,20 +15,20 @@ import com.kotlin.mvvm.repository.model.news.News
  * Abstracts access to the news database
  */
 @Dao
-interface NewsDao {
+abstract class NewsDao {
 
     /**
      * Insert articles into the database
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArticles(articles: List<News>): List<Long>
+    abstract suspend fun insertArticles(articles: List<News>)
 
     /**
      * Get all the articles from database
      */
     @Query("SELECT * FROM news_table")
-    fun getNewsArticles(): LiveData<List<News>>
+    abstract suspend fun getNewsArticles(): List<News>
 
     @Query("DELETE FROM news_table")
-    abstract fun deleteAllArticles()
+    abstract suspend fun deleteAllArticles()
 }

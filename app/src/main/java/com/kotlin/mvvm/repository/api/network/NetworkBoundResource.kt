@@ -1,8 +1,12 @@
 package com.kotlin.mvvm.repository.api.network
 
 import androidx.annotation.MainThread
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.*
+import java.lang.Exception
+import kotlin.coroutines.coroutineContext
 
 /**
  * Created by Waheed on 04,November,2019
@@ -14,50 +18,56 @@ import androidx.lifecycle.MediatorLiveData
  * only from network.
  *
  */
-abstract class NetworkResource<RequestType> @MainThread constructor() {
+abstract class NetworkResource<ResultType, RequestType> {
 
-    /**
-     * The final result LiveData
-     * MediatorLiveData is a LiveData subclass which may observe
-     * other LiveData objects and react on OnChanged events from them.
-     *
-     * This class correctly propagates its active/inactive states down to source LiveData objects.
-     */
-    private val result = MediatorLiveData<Resource<RequestType>>()
+    private val result = MutableLiveData<Resource<ResultType>>()
+    private val supervisorJob = SupervisorJob()
 
-    init {
-        // Send loading state to UI
-        result.value = Resource.loading()
-        fetchFromNetwork()
-    }
-
-    /**
-     * Fetch the data from network and then send it upstream to UI.
-     */
-    private fun fetchFromNetwork() {
-        val apiResponse = createCall()
-        // Make the network call
-        result.addSource(apiResponse) { response ->
-            result.removeSource(apiResponse)
-            // Dispatch the result
-            response?.apply {
-                when {
-                    status.isSuccessful() -> setValue(this)
-                    else -> setValue(Resource.error(errorMessage))
+    suspend fun build(): NetworkResource<ResultType, RequestType> {
+        withContext(Dispatchers.Main) {
+            result.value = Resource.loading()
+        }
+        CoroutineScope(coroutineContext).launch(supervisorJob) {
+            if (shouldFetch()) {
+                try {
+                    fetchFromNetwork()
+                } catch (e: Exception) {
+                    setValue(Resource.error("An error happened: $e"))
                 }
+            } else {
+                setValue(Resource.error("No Internet Connection"))
             }
         }
+        return this
     }
 
-    fun asLiveData(): LiveData<Resource<RequestType>> = result
+    fun asLiveData() = result as LiveData<Resource<ResultType>>
 
+    // ---
 
-    @MainThread
-    private fun setValue(newValue: Resource<RequestType>) {
-        if (result.value != newValue)
-            result.value = newValue
+    private suspend fun fetchFromNetwork() {
+        val apiResponse = createCallAsync().await()
+        saveCallResults(processResponse(apiResponse))
+        setValue(Resource.success(loadFromDb()))
     }
 
     @MainThread
-    protected abstract fun createCall(): LiveData<Resource<RequestType>>
+    private fun setValue(newValue: Resource<ResultType>) {
+        if (result.value != newValue) result.postValue(newValue)
+    }
+
+    @WorkerThread
+    protected abstract fun processResponse(response: RequestType): ResultType
+
+    @WorkerThread
+    protected abstract suspend fun saveCallResults(items: ResultType)
+
+    @MainThread
+    protected abstract fun shouldFetch(): Boolean
+
+    @MainThread
+    protected abstract suspend fun loadFromDb(): ResultType
+
+    @MainThread
+    protected abstract fun createCallAsync(): Deferred<RequestType>
 }
