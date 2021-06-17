@@ -5,8 +5,6 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.kotlin.mvvm.app.AppExecutors
-import com.kotlin.mvvm.utils.ConnectivityUtil
-
 
 /**
  * Created by Waheed on 04,November,2019
