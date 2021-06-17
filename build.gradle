@@ -3,31 +3,31 @@
 buildscript {
     // Android SDK version
     ext.androidMinSdkVersion = 16
-    ext.androidTargetSdkVersion = 29
-    ext.androidCompileSdkVersion = 29
+    ext.androidTargetSdkVersion = 30
+    ext.androidCompileSdkVersion = 30
 
     // Kotlin
-    ext.kotlinVersion = '1.4.10'
+    ext.kotlinVersion = '1.5.10'
     ext.ankoVersion = '0.10.4'
 
     // Android library
     ext.androidGradlePlugin = '4.0.1'
     ext.supportVersion = '28.0.0'
     ext.lifecycleVersion = "2.2.0"
-    ext.roomVersion = "2.2.5"
+    ext.roomVersion = "2.3.0"
 
     // Networking
     ext.retrofitVersion = '2.9.0'
     ext.okHttpVersion = '4.7.2'
 
     // Glide
-    ext.glideVersion = "4.11.0"
+    ext.glideVersion = "4.12.0"
 
     // Dagger
-    ext.dagger_version = "2.27"
+    ext.dagger_version = "2.35.1"
 
     // Testing
-    ext.jUnitVersion = '4.13'
+    ext.jUnitVersion = '4.13.2'
     ext.mockitoVersion = '2.8.9'
     ext.mockitoExtensionVersion = '1.5.0'
     ext.espressoVersion = '2.2.2'
