@@ -2,6 +2,7 @@
     <!-- App details -->
     <string name="app_name">News</string>
     <string name="countries">Countries</string>
+    <string name="news_by_countries">New By Countries</string>
     <string name="news">News</string>
 
     <!-- Content Description -->

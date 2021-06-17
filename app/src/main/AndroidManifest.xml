@@ -18,7 +18,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".ui.countries.CountriesActivity"
-            android:label="@string/countries">
+            android:label="@string/news_by_countries">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
