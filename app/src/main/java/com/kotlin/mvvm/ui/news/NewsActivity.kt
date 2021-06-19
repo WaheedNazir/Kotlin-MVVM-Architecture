@@ -2,12 +2,15 @@ package com.kotlin.mvvm.ui.news
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.ui.BaseActivity
 import com.kotlin.mvvm.utils.ToastUtil
 import com.kotlin.mvvm.utils.extensions.load
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_news_articles.*
 import kotlinx.android.synthetic.main.empty_layout_news_article.*
 import kotlinx.android.synthetic.main.progress_layout_news_article.*
@@ -16,6 +19,7 @@ import kotlinx.android.synthetic.main.progress_layout_news_article.*
  * Created by Waheed on 04,November,2019
  */
 
+@AndroidEntryPoint
 class NewsActivity : BaseActivity() {
 
 
@@ -25,9 +29,18 @@ class NewsActivity : BaseActivity() {
 
     private lateinit var adapter: NewsAdapter
 
-    private val newsArticleViewModel: NewsViewModel by viewModels {
-        viewModelFactory
-    }
+    /**
+     * RegistrationViewModel is used to set the username and password information (attached to
+     * Activity's lifecycle and shared between different fragments)
+     * EnterDetailsViewModel is used to validate the user input (attached to this
+     * Fragment's lifecycle)
+     *
+     * They could get combined but for the sake of the codelab, we're separating them so we have
+     * different ViewModels with different lifecycles.
+     *
+     * @Inject annotated fields will be provided by Dagger
+     */
+    private val newsArticleViewModel: NewsViewModel by viewModels()
 
     /**
      * On Create Of Activity

@@ -3,10 +3,13 @@ package com.kotlin.mvvm.ui.countries
 import android.os.Bundle
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.ui.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by Waheed on 08,November,2019
  */
+
+@AndroidEntryPoint
 class CountriesActivity : BaseActivity() {
 
     /**
