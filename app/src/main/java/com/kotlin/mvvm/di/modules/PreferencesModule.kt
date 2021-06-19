@@ -1,25 +1,29 @@
 package com.kotlin.mvvm.di.modules
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 /**
  * Created by Waheed on 04,November,2019
+ * Migrated to Hilt 20, June, 2021
  */
 
 @Module
-class PreferencesModule {
+@InstallIn(SingletonComponent::class)
+object PreferencesModule {
 
     /**
      * Provides Preferences object with MODE_PRIVATE
      */
-    @Provides
     @Singleton
-    fun provideSharedPreference(app: Application): SharedPreferences =
-        app.getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE)
+    @Provides
+    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences =
+        context.getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE)
 
 }
