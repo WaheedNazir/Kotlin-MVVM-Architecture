@@ -1,6 +1,5 @@
 package com.kotlin.mvvm.ui.countries
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -8,15 +7,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.repository.model.countries.Country
 import com.kotlin.mvvm.ui.news.NewsActivity
-
-import dagger.android.support.AndroidSupportInjection
-import dagger.android.support.DaggerFragment
+import com.kotlin.mvvm.ui.news.NewsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_country_list.view.*
 import javax.inject.Inject
 
@@ -28,15 +28,21 @@ import javax.inject.Inject
 /**
  * A fragment representing a list of Items.
  */
-class CountriesFragment : DaggerFragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-
-    private val countriesViewModel: CountriesViewModel by viewModels {
-        viewModelFactory
-    }
+@AndroidEntryPoint
+class CountriesFragment : Fragment() {
+    /**
+     * RegistrationViewModel is used to set the username and password information (attached to
+     * Activity's lifecycle and shared between different fragments)
+     * EnterDetailsViewModel is used to validate the user input (attached to this
+     * Fragment's lifecycle)
+     *
+     * They could get combined but for the sake of the codelab, we're separating them so we have
+     * different ViewModels with different lifecycles.
+     *
+     * @Inject annotated fields will be provided by Dagger
+     */
+    private val countriesViewModel: CountriesViewModel by activityViewModels()
 
     private var columnCount = 1
     private lateinit var countriesAdapter: CountriesAdapter
@@ -57,14 +63,6 @@ class CountriesFragment : DaggerFragment() {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
             }
-    }
-
-    /**
-     *
-     */
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this) // Providing the dependency
-        super.onAttach(context)
     }
 
     /**
