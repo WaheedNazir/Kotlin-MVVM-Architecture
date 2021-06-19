@@ -15,7 +15,7 @@ android {
         applicationId "com.kotlin.mvvm.architecture"
         minSdkVersion androidMinSdkVersion
         versionCode 2
-        versionName "1.0.1"
+        versionName "1.0.2"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
