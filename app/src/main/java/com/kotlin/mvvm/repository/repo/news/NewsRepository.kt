@@ -12,6 +12,7 @@ import com.kotlin.mvvm.repository.db.news.NewsDao
 import com.kotlin.mvvm.repository.model.news.News
 import com.kotlin.mvvm.repository.model.news.NewsSource
 import com.kotlin.mvvm.utils.ConnectivityUtil
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,7 +29,8 @@ import javax.inject.Singleton
 @Singleton
 class NewsRepository @Inject constructor(
     private val newsDao: NewsDao,
-    private val apiServices: ApiServices, private val context: Context,
+    private val apiServices: ApiServices,
+    @ApplicationContext val context: Context,
     private val appExecutors: AppExecutors = AppExecutors()
 ) {
 

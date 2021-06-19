@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import com.kotlin.mvvm.repository.db.countries.CountriesDao
 import com.kotlin.mvvm.repository.model.countries.Country
 import com.kotlin.mvvm.utils.CountryNameMapping
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -24,7 +25,7 @@ import javax.inject.Singleton
 @Singleton
 class CountriesRepository @Inject constructor(
     private val countriesDao: CountriesDao,
-    private val context: Context
+    @ApplicationContext val context: Context
 ) {
 
     /**
