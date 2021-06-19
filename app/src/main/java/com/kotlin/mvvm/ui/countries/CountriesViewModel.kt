@@ -6,16 +6,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlin.mvvm.repository.model.countries.Country
 import com.kotlin.mvvm.repository.repo.countries.CountriesRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
  * Created by Waheed on 08,November,2019
- */
-
-/**
+ *
  * A container for [Country] related data to show on the UI.
  */
+
+@HiltViewModel
 class CountriesViewModel @Inject constructor(val countriesRepository: CountriesRepository) :
     ViewModel() {
 

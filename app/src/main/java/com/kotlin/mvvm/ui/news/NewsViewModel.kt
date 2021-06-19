@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.kotlin.mvvm.repository.api.network.Resource
 import com.kotlin.mvvm.repository.model.news.News
 import com.kotlin.mvvm.repository.repo.news.NewsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 /**
@@ -14,9 +15,9 @@ import javax.inject.Inject
 /**
  * A container for [News] related data to show on the UI.
  */
-class NewsViewModel @Inject constructor(
-    private val newsRepository: NewsRepository
-) : ViewModel() {
+
+@HiltViewModel
+class NewsViewModel @Inject constructor(private val newsRepository: NewsRepository) : ViewModel() {
 
     /**
      * Loading news articles from internet and database
