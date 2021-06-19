@@ -26,24 +26,26 @@ buildscript {
     // Dagger
     ext.dagger_version = "2.35.1"
 
+    // Hilt
+    ext.hilt_version = "2.35"
+
     // Testing
     ext.jUnitVersion = '4.13.2'
     ext.mockitoVersion = '2.8.9'
     ext.mockitoExtensionVersion = '1.5.0'
     ext.espressoVersion = '2.2.2'
     ext.testRunnerVersion = '1.0.1'
-
     ext.debugDbVersion = '1.0.5'
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${androidGradlePlugin}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
-
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -51,7 +53,6 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google()
         mavenCentral()
     }
