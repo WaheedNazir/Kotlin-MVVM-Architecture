@@ -22,10 +22,10 @@ fun <ResultType> Response<ResultType>.toResource(): Resource<ResultType> {
         isSuccessful -> {
             val body = body()
             when {
-                body != null -> Resource.success(body)
-                else -> Resource.error(error)
+                body != null -> Resource.success(body, this.code())
+                else -> Resource.error(error, this.code())
             }
         }
-        else -> Resource.error(error)
+        else -> Resource.error(error, this.code())
     }
 }

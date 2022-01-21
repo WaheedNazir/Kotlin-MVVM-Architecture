@@ -6,7 +6,7 @@ import java.lang.Exception
 import java.net.SocketTimeoutException
 
 
-object CallAdapterErrorHandling {
+object ApiErrorHandling {
 
     private const val ERROR_SOMETHING_WENT_WRONG = "Something went wrong."
     private const val ERROR_REQUEST_CANCELLED = "Request cancelled."

@@ -12,6 +12,7 @@ package com.kotlin.mvvm.repository.api.network
 data class Resource<ResultType>(
     var status: Status,
     var data: ResultType? = null,
+    var retrofitAPICode: Int = 0,
     var errorMessage: String? = null
 ) {
 
@@ -22,8 +23,8 @@ data class Resource<ResultType>(
          * last value is null so passing it optionally
          *
          */
-        fun <ResultType> success(data: ResultType): Resource<ResultType> =
-            Resource(Status.SUCCESS, data)
+        fun <ResultType> success(data: ResultType, retrofitAPICode: Int): Resource<ResultType> =
+            Resource(Status.SUCCESS, data, retrofitAPICode = retrofitAPICode)
 
         /**
          * Creates [Resource] object with `LOADING` status to notify
@@ -37,8 +38,8 @@ data class Resource<ResultType>(
          * Creates [Resource] object with `ERROR` status and [message].
          * Returning object of Resource(Status.ERROR, errorMessage = message)
          */
-        fun <ResultType> error(message: String?): Resource<ResultType> =
-            Resource(Status.ERROR, errorMessage = message)
+        fun <ResultType> error(message: String?, retrofitAPICode: Int): Resource<ResultType> =
+            Resource(Status.ERROR, errorMessage = message, retrofitAPICode = retrofitAPICode)
 
     }
 }

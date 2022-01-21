@@ -43,7 +43,12 @@ abstract class NetworkResource<RequestType> @MainThread constructor() {
             response?.apply {
                 when {
                     status.isSuccessful() -> setValue(this)
-                    else -> setValue(Resource.error(errorMessage))
+                    else -> setValue(
+                        Resource.error(
+                            errorMessage,
+                            result.value?.retrofitAPICode ?: 0
+                        )
+                    )
                 }
             }
         }

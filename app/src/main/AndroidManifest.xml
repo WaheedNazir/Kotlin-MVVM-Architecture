@@ -18,6 +18,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".ui.countries.CountriesActivity"
+            android:exported="true"
             android:label="@string/news_by_countries">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +29,7 @@
 
         <activity
             android:name=".ui.news.NewsActivity"
+            android:exported="false"
             android:label="@string/news" />
     </application>
 

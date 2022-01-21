@@ -2,10 +2,8 @@ package com.kotlin.mvvm.repository.api.network
 
 
 import androidx.lifecycle.LiveData
-import retrofit2.Call
-import retrofit2.CallAdapter
-import retrofit2.Callback
-import retrofit2.Response
+import com.kotlin.mvvm.utils.ApiErrorHandling
+import retrofit2.*
 import java.lang.reflect.Type
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -21,14 +19,11 @@ import java.util.concurrent.atomic.AtomicBoolean
 class LiveDataCallAdapter<R>(private val responseType: Type) :
     CallAdapter<R, LiveData<Resource<R>>> {
 
-    override fun responseType(): Type {
-        return responseType
-    }
+    override fun responseType(): Type = responseType
 
     override fun adapt(call: Call<R>): LiveData<Resource<R>> {
         return object : LiveData<Resource<R>>() {
-            internal var started = AtomicBoolean(false)
-
+            var started = AtomicBoolean(false)
             override fun onActive() {
                 super.onActive()
                 if (started.compareAndSet(false, true)) {
@@ -38,7 +33,14 @@ class LiveDataCallAdapter<R>(private val responseType: Type) :
                         }
 
                         override fun onFailure(call: Call<R>, throwable: Throwable) {
-                            postValue(Resource.error(throwable.message))
+                            postValue(
+                                Resource.error(
+                                    ApiErrorHandling.error(
+                                        throwable,
+                                        call.isCanceled
+                                    ), if (throwable is HttpException) throwable.code() else 0
+                                )
+                            )
                         }
                     })
                 }

@@ -40,7 +40,7 @@ constructor(private val appExecutors: AppExecutors) {
                 shouldFetch(data) -> fetchFromNetwork(dbSource)
                 else -> {
                     result.addSource(dbSource) { newData ->
-                        setValue(Resource.success(newData))
+                        setValue(Resource.success(newData,result.value?.retrofitAPICode ?: 0))
                     }
                 }
             }
@@ -75,14 +75,24 @@ constructor(private val appExecutors: AppExecutors) {
                                 // otherwise we will get immediately last cached value,
                                 // which may not be updated with latest results received from network.
                                 result.addSource(loadFromDb()) { newData ->
-                                    setValue(Resource.success(newData))
+                                    setValue(
+                                        Resource.success(
+                                            newData,
+                                            result.value?.retrofitAPICode ?: 0
+                                        )
+                                    )
                                 }
                             }
                         }
                     }
                     else -> {
                         result.addSource(dbSource) {
-                            result.setValue(Resource.error(errorMessage))
+                            result.setValue(
+                                Resource.error(
+                                    errorMessage,
+                                    result.value?.retrofitAPICode ?: 0
+                                )
+                            )
                         }
                     }
                 }
