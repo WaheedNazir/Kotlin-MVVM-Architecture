@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.widget.Toast
+import com.kotlin.mvvm.utils.ToastUtil
 
 /**
  * Created by Waheed on 04,November,2019
@@ -36,6 +38,14 @@ fun Activity.startActivityNewTask(clazz: Class<*>) {
     val intent = Intent(this, clazz)
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
     startActivity(intent)
+}
+
+fun Activity.toast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Activity.customToast(message: String) {
+    ToastUtil.showCustomToast(this, message)
 }
 
 @Suppress("DEPRECATION")

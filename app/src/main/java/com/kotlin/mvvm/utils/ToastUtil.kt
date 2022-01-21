@@ -19,7 +19,7 @@ object ToastUtil {
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val layout = inflater.inflate(R.layout.toast_layout, null)
             val textView = layout.findViewById(R.id.tvToastMsgId) as TextView
-            textView.setText(message)
+            textView.text = message
             val toast = Toast(context)
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0)
             toast.duration = Toast.LENGTH_SHORT
@@ -28,9 +28,5 @@ object ToastUtil {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
-
-    fun showNormalToast(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

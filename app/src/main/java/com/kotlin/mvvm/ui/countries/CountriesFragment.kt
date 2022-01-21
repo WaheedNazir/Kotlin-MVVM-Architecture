@@ -1,5 +1,6 @@
 package com.kotlin.mvvm.ui.countries
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -114,9 +115,10 @@ class CountriesFragment : Fragment() {
     /**
      *
      */
+    @SuppressLint("NotifyDataSetChanged")
     private fun observeCountries() {
-        countriesViewModel.getCountries().observe(viewLifecycleOwner, Observer {
-            // You'l get list of countries here
+        countriesViewModel.getCountries().observe(viewLifecycleOwner, {
+            // You'll get list of countries here
             it?.let {
                 listOfCountries.clear()
                 listOfCountries.addAll(it)

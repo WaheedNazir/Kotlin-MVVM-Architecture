@@ -44,9 +44,9 @@ class CountriesAdapter(private val countries: List<Country>) :
     /**
      *
      */
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val iv_country_image: ImageView = mView.iv_country_image
-        val tv_country_name: TextView = mView.tv_country_name
+    inner class ViewHolder(private val mView: View) : RecyclerView.ViewHolder(mView) {
+        private val imageViewCountry: ImageView = mView.iv_country_image
+        private val textViewCountryName: TextView = mView.tv_country_name
 
         init {
             mView.setOnClickListener {
@@ -55,11 +55,11 @@ class CountriesAdapter(private val countries: List<Country>) :
         }
 
         override fun toString(): String {
-            return super.toString() + " '" + tv_country_name.text + "'"
+            return super.toString() + " '" + textViewCountryName.text + "'"
         }
 
         fun bindView(country: Country) {
-            tv_country_name.text = country.displayName
+            textViewCountryName.text = country.displayName
 
             Glide.with(mView.context)
                 .load(Uri.parse(country.countryFagUrl))
@@ -70,7 +70,7 @@ class CountriesAdapter(private val countries: List<Country>) :
                         .centerCrop()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                 )
-                .into(iv_country_image)
+                .into(imageViewCountry)
         }
     }
 }
