@@ -2,13 +2,9 @@ package com.kotlin.mvvm.ui.news
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.ui.BaseActivity
-import com.kotlin.mvvm.utils.ToastUtil
 import com.kotlin.mvvm.utils.extensions.load
 import com.kotlin.mvvm.utils.extensions.toast
 import dagger.hilt.android.AndroidEntryPoint
