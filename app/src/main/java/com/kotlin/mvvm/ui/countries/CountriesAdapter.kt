@@ -2,17 +2,15 @@ package com.kotlin.mvvm.ui.countries
 
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.kotlin.mvvm.R
+import com.kotlin.mvvm.databinding.RowCountryListBinding
 import com.kotlin.mvvm.repository.model.countries.Country
-import kotlinx.android.synthetic.main.row_country_list.view.*
+import com.kotlin.mvvm.utils.load
 
 class CountriesAdapter(private val countries: List<Country>) :
     RecyclerView.Adapter<CountriesAdapter.ViewHolder>() {
@@ -23,10 +21,11 @@ class CountriesAdapter(private val countries: List<Country>) :
     /**
      *
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        LayoutInflater.from(parent.context)
-            .inflate(R.layout.row_country_list, parent, false)
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val itemBinding =
+            RowCountryListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(itemBinding)
+    }
 
     /**
      *
@@ -44,33 +43,25 @@ class CountriesAdapter(private val countries: List<Country>) :
     /**
      *
      */
-    inner class ViewHolder(private val mView: View) : RecyclerView.ViewHolder(mView) {
-        private val imageViewCountry: ImageView = mView.iv_country_image
-        private val textViewCountryName: TextView = mView.tv_country_name
+    inner class ViewHolder(private val itemBinding: RowCountryListBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
 
         init {
-            mView.setOnClickListener {
+            itemBinding.root.setOnClickListener {
                 onCountryClicked?.invoke(countries[adapterPosition])
             }
         }
 
         override fun toString(): String {
-            return super.toString() + " '" + textViewCountryName.text + "'"
+            return super.toString() + " '" + itemBinding.tvCountryName.text + "'"
         }
 
         fun bindView(country: Country) {
-            textViewCountryName.text = country.displayName
-
-            Glide.with(mView.context)
-                .load(Uri.parse(country.countryFagUrl))
-                .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.loading_banner_image)
-                        .error(R.drawable.loading_banner_image)
-                        .centerCrop()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                )
-                .into(imageViewCountry)
+            itemBinding.tvCountryName.text = country.displayName
+            itemBinding.ivCountryImage.load(
+                itemBinding.root.context,
+                Uri.parse(country.countryFagUrl).toString()
+            )
         }
     }
 }

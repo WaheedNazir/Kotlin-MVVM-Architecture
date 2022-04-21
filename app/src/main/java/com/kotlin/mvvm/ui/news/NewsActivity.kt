@@ -4,20 +4,20 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kotlin.mvvm.R
-import com.kotlin.mvvm.ui.BaseActivity
+import com.kotlin.mvvm.base.BaseActivity
+import com.kotlin.mvvm.databinding.ActivityNewsArticlesBinding
+import com.kotlin.mvvm.databinding.EmptyLayoutNewsArticleBinding
+import com.kotlin.mvvm.databinding.ProgressLayoutNewsArticleBinding
 import com.kotlin.mvvm.utils.extensions.load
 import com.kotlin.mvvm.utils.extensions.toast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_news_articles.*
-import kotlinx.android.synthetic.main.empty_layout_news_article.*
-import kotlinx.android.synthetic.main.progress_layout_news_article.*
 
 /**
  * Created by Waheed on 04,November,2019
  */
 
 @AndroidEntryPoint
-class NewsActivity : BaseActivity() {
+class NewsActivity : BaseActivity<ActivityNewsArticlesBinding>() {
 
     companion object {
         const val KEY_COUNTRY_SHORT_KEY: String = "COUNTRY_SHORT_KEY"
@@ -39,22 +39,28 @@ class NewsActivity : BaseActivity() {
     private val newsArticleViewModel: NewsViewModel by viewModels()
 
     /**
+     * Create Binding
+     */
+    override fun createBinding(): ActivityNewsArticlesBinding {
+        return ActivityNewsArticlesBinding.inflate(layoutInflater)
+    }
+
+    /**
      * On Create Of Activity
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_news_articles)
 
-        news_list.setEmptyView(empty_view)
-        news_list.setProgressView(progress_view)
+        binding.newsList.setEmptyView(binding.progressView.progressView)
+        binding.newsList.setProgressView(binding.emptyView.emptyView)
 
         adapter = NewsAdapter()
         adapter.onNewsClicked = {
             //TODO Your news item click invoked here
         }
 
-        news_list.adapter = adapter
-        news_list.layoutManager = LinearLayoutManager(this)
+        binding.newsList.adapter = adapter
+        binding.newsList.layoutManager = LinearLayoutManager(this)
 
         getNewsOfCountry(intent?.getStringExtra(KEY_COUNTRY_SHORT_KEY) ?: "")
     }
@@ -64,13 +70,13 @@ class NewsActivity : BaseActivity() {
      * Observing for data change from DB and Network Both
      */
     private fun getNewsOfCountry(countryKey: String) {
-        newsArticleViewModel.getNewsArticles(countryKey).observe(this, {
+        newsArticleViewModel.getNewsArticles(countryKey).observe(this) {
             when {
                 it.status.isLoading() -> {
-                    news_list.showProgressView()
+                    binding.newsList.showProgressView()
                 }
                 it.status.isSuccessful() -> {
-                    it?.load(news_list) { news ->
+                    it?.load(binding.newsList) { news ->
                         adapter.replaceItems(news ?: emptyList())
                     }
                 }
@@ -79,6 +85,6 @@ class NewsActivity : BaseActivity() {
                     finish()
                 }
             }
-        })
+        }
     }
 }

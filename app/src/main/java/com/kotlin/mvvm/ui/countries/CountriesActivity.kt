@@ -1,10 +1,9 @@
 package com.kotlin.mvvm.ui.countries
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import com.kotlin.mvvm.R
-import com.kotlin.mvvm.ui.BaseActivity
-import com.kotlin.mvvm.utils.extensions.toast
+import com.kotlin.mvvm.base.BaseActivity
+import com.kotlin.mvvm.databinding.ActivityCountiresBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -13,17 +12,22 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class CountriesActivity : BaseActivity() {
+class CountriesActivity : BaseActivity<ActivityCountiresBinding>() {
 
     //Note: You can get SharedPreferences instance by injecting it
     /*@Inject
     lateinit var sharedPreferences: SharedPreferences*/
 
     /**
+     * Create Binding
+     */
+    override fun createBinding(): ActivityCountiresBinding =
+        ActivityCountiresBinding.inflate(layoutInflater)
+
+    /**
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_countires)
 
         if (savedInstanceState == null) {
             supportFragmentManager

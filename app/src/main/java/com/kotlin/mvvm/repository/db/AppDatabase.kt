@@ -18,9 +18,6 @@ import com.kotlin.mvvm.repository.model.news.News
 @Database(entities = [News::class, Country::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
-    /**
-     * Get DAO's
-     */
     abstract fun newsArticlesDao(): NewsDao
 
     abstract fun countriesDao(): CountriesDao

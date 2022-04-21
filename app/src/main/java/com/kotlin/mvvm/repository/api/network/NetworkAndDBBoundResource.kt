@@ -40,7 +40,7 @@ constructor(private val appExecutors: AppExecutors) {
                 shouldFetch(data) -> fetchFromNetwork(dbSource)
                 else -> {
                     result.addSource(dbSource) { newData ->
-                        setValue(Resource.success(newData,result.value?.retrofitAPICode ?: 0))
+                        setValue(Resource.success(newData, result.value?.retrofitAPICode ?: 0))
                     }
                 }
             }

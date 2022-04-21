@@ -18,10 +18,12 @@
 
     <!-- Progress and empty views -->
     <include
+        android:id="@+id/progressView"
         layout="@layout/progress_layout_news_article"
         tools:visibility="visible" />
 
     <include
+        android:id="@+id/emptyView"
         layout="@layout/empty_layout_news_article"
         tools:visibility="invisible" />
 

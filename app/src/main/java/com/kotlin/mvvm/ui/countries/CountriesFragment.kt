@@ -8,18 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.kotlin.mvvm.R
+import com.kotlin.mvvm.base.BaseFragment
+import com.kotlin.mvvm.databinding.FragmentCountryListBinding
 import com.kotlin.mvvm.repository.model.countries.Country
 import com.kotlin.mvvm.ui.news.NewsActivity
-import com.kotlin.mvvm.ui.news.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_country_list.view.*
-import javax.inject.Inject
 
 /**
  * Created by Waheed on 08,November,2019
@@ -31,7 +25,7 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class CountriesFragment : Fragment() {
+class CountriesFragment : BaseFragment<FragmentCountryListBinding>() {
     /**
      * RegistrationViewModel is used to set the username and password information (attached to
      * Activity's lifecycle and shared between different fragments)
@@ -48,8 +42,15 @@ class CountriesFragment : Fragment() {
     private var columnCount = 1
     private lateinit var countriesAdapter: CountriesAdapter
     private var listOfCountries = ArrayList<Country>()
-    private lateinit var thisView: View
 
+    /**
+     * Create Binding
+     */
+    override fun onCreateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): FragmentCountryListBinding = FragmentCountryListBinding.inflate(inflater, container, false)
 
     /**
      *
@@ -80,30 +81,23 @@ class CountriesFragment : Fragment() {
     /**
      *
      */
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        thisView = inflater.inflate(R.layout.fragment_country_list, container, false)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         load()
         observeCountries()
-
-        return thisView
     }
 
     /**
      *
      */
     private fun load() {
-        thisView.recyclerview_countries.layoutManager =
+        binding?.recyclerviewCountries?.layoutManager =
             if (columnCount <= 1) LinearLayoutManager(context) else GridLayoutManager(
                 context,
                 columnCount
             )
         countriesAdapter = CountriesAdapter(listOfCountries)
-        thisView.recyclerview_countries.adapter = countriesAdapter
+        binding?.recyclerviewCountries?.adapter = countriesAdapter
 
         countriesAdapter.onCountryClicked = { country ->
             val intent = Intent(context, NewsActivity::class.java)
@@ -117,13 +111,13 @@ class CountriesFragment : Fragment() {
      */
     @SuppressLint("NotifyDataSetChanged")
     private fun observeCountries() {
-        countriesViewModel.getCountries().observe(viewLifecycleOwner, {
+        countriesViewModel.getCountries().observe(viewLifecycleOwner) {
             // You'll get list of countries here
             it?.let {
                 listOfCountries.clear()
                 listOfCountries.addAll(it)
                 countriesAdapter.notifyDataSetChanged()
             }
-        })
+        }
     }
 }
