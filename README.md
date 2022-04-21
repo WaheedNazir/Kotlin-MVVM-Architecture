@@ -58,5 +58,5 @@ A sample app that display list of Google news. The purpose of this project to il
 ## Sources
  1. [Google's official doc](https://developer.android.com/jetpack/docs/guide)
  2. [Google's Codelab](https://codelabs.developers.google.com/codelabs/android-training-livedata-viewmodel/#0)
- 2. [Architecture Components Samples](https://github.com/android/architecture-components-samples/tree/88747993139224a4bb6dbe985adf652d557de621)
- 3. [Jose Alcérreca's post at Medium](https://medium.com/androiddevelopers/livedata-beyond-the-viewmodel-reactive-patterns-using-transformations-and-mediatorlivedata-fda520ba00b7)
+ 3. [Architecture Components Samples](https://github.com/android/architecture-components-samples)
+ 4. [Jose Alcérreca's post at Medium](https://medium.com/androiddevelopers/livedata-beyond-the-viewmodel-reactive-patterns-using-transformations-and-mediatorlivedata-fda520ba00b7)
