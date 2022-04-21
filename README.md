@@ -4,17 +4,17 @@ A sample app that display list of Google news. The purpose of this project to il
 
  1. Architecture Design Pattern
  2. MVVM
- 2. Dagger2 (Dependency Injection)
+ 2. Hilt (Dependency Injection)
  3. Live Data, MediatorLiveData
  4. Room Database
  5. Retrofit
- 6. Unit Testing (Espresso), Mockito (Coming soon)
- 7. Repository Pattern
- 8. AndroidX
- 9. Glide
- 10. NetworkBoundResource, NetworkAndDBBoundResource
- 11. Google News API
- 12. JetPack Libraries
+ 6. Repository Pattern
+ 7. AndroidX
+ 8. Glide
+ 9. NetworkBoundResource, NetworkAndDBBoundResource
+ 10. Google News API
+ 11. JetPack Libraries
+ 12. View Binding
 
 ### Demo
 <img height="400px" src="https://github.com/WaheedNazir/Kotlin-MVVM-Architecture/blob/master/screens/sample_demo.gif" />
