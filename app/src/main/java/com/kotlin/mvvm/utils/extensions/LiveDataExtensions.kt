@@ -6,9 +6,7 @@ import androidx.lifecycle.Observer
 import com.kotlin.mvvm.repository.api.network.Resource
 import com.kotlin.mvvm.utils.widget.CompleteRecyclerView
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 
 /**

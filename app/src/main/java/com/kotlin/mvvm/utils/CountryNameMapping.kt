@@ -1,8 +1,5 @@
 package com.kotlin.mvvm.utils
 
-/**
- * Created by Waheed on 08,November,2019
- */
 
 /**
  * Get Country Short Key Required For API.

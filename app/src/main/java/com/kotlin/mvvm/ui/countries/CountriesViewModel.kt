@@ -1,8 +1,8 @@
 package com.kotlin.mvvm.ui.countries
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.kotlin.mvvm.repository.model.countries.Country
 import com.kotlin.mvvm.repository.repo.countries.CountriesRepository
@@ -11,25 +11,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * Created by Waheed on 08,November,2019
- *
  * A container for [Country] related data to show on the UI.
  */
 
 @HiltViewModel
-class CountriesViewModel @Inject constructor(val countriesRepository: CountriesRepository) :
+class CountriesViewModel @Inject constructor(private val countriesRepository: CountriesRepository) :
     ViewModel() {
 
-    /**
-     * Loading news articles from internet and database
-     */
-    private var countries: MutableLiveData<List<Country>> = MutableLiveData()
+    val countries: LiveData<List<Country>> = countriesRepository.getCountries.asLiveData()
 
-    fun getCountries(): LiveData<List<Country>> {
-        viewModelScope.launch {
-            val result = countriesRepository.getCountries()
-            countries.postValue(result)
-        }
-        return countries
+    /**
+     * If countries are empty in the Database just call this to refresh
+     */
+    fun refreshCountries() = viewModelScope.launch {
+        countriesRepository.insertCountries()
     }
 }

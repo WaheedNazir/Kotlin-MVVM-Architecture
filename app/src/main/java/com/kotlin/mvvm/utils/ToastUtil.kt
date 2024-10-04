@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import com.kotlin.mvvm.R
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 object ToastUtil {
 

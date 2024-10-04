@@ -6,9 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.kotlin.mvvm.app.AppExecutors
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 /**
  * A generic class that can provide a resource backed by both the sqlite database and the network.

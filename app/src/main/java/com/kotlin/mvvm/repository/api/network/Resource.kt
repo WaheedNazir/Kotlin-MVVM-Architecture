@@ -1,9 +1,7 @@
 package com.kotlin.mvvm.repository.api.network
 
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 /**
  * A generic class that holds a value with its loading status.

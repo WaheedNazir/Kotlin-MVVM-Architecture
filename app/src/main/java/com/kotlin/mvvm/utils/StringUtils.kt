@@ -2,9 +2,7 @@ package com.kotlin.mvvm.utils
 
 import java.util.regex.Pattern
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 object StringUtils {
     private val EMAIL_REGEX = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"

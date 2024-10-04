@@ -3,9 +3,7 @@ package com.kotlin.mvvm.repository.api.network
 import retrofit2.Response
 import retrofit2.Retrofit
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 /**
  * Synthetic sugaring to create Retrofit Service.

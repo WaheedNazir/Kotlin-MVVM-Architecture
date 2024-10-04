@@ -3,9 +3,7 @@ package com.kotlin.mvvm.utils
 import android.content.Context
 import android.util.DisplayMetrics
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 object PixelUtil {
 

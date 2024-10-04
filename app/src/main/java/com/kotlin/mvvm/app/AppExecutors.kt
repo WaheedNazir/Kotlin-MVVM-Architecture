@@ -8,10 +8,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Created by Waheed on 04,November,2019
- */
-
-/**
  * Global executor pools for the whole application.
  *
  * Grouping tasks like this avoids the effects of task starvation (e.g. disk reads don't wait behind

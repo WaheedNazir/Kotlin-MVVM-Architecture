@@ -8,9 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.kotlin.mvvm.utils.ToastUtil
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 fun Activity.startActivity(clazz: Class<*>) {
     val intent = Intent(this, clazz)

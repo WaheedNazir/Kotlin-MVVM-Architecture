@@ -8,9 +8,7 @@ import java.lang.reflect.Type
 import java.util.concurrent.atomic.AtomicBoolean
 
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 /**
  * A Retrofit adapter that converts the Call into a LiveData of ApiResponse.

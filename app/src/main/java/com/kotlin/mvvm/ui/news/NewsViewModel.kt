@@ -8,9 +8,7 @@ import com.kotlin.mvvm.repository.repo.news.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 /**
  * A container for [News] related data to show on the UI.

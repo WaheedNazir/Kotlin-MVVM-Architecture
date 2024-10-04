@@ -8,9 +8,7 @@ import android.provider.Settings;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 public final class CommonUtils {
 

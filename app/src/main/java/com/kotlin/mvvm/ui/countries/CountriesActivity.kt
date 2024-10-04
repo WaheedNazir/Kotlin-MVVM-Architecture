@@ -5,11 +5,6 @@ import com.kotlin.mvvm.R
 import com.kotlin.mvvm.base.BaseActivity
 import com.kotlin.mvvm.databinding.ActivityCountiresBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-
-/**
- * Created by Waheed on 08,November,2019
- */
 
 @AndroidEntryPoint
 class CountriesActivity : BaseActivity<ActivityCountiresBinding>() {

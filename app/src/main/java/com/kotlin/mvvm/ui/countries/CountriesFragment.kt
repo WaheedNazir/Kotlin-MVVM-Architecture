@@ -16,11 +16,6 @@ import com.kotlin.mvvm.ui.news.NewsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Created by Waheed on 08,November,2019
- * Updated to dagger 2.27, 29, September 2020
- */
-
-/**
  * A fragment representing a list of Items.
  */
 
@@ -111,11 +106,13 @@ class CountriesFragment : BaseFragment<FragmentCountryListBinding>() {
      */
     @SuppressLint("NotifyDataSetChanged")
     private fun observeCountries() {
-        countriesViewModel.getCountries().observe(viewLifecycleOwner) {
-            // You'll get list of countries here
-            it?.let {
+        countriesViewModel.countries.observe(viewLifecycleOwner) { countries ->
+            if (countries.isNullOrEmpty()) {
+                //Refresh local countries list
+                countriesViewModel.refreshCountries()
+            } else {
                 listOfCountries.clear()
-                listOfCountries.addAll(it)
+                listOfCountries.addAll(countries)
                 countriesAdapter.notifyDataSetChanged()
             }
         }

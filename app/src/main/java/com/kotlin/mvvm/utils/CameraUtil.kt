@@ -12,9 +12,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 object CameraUtil {
 

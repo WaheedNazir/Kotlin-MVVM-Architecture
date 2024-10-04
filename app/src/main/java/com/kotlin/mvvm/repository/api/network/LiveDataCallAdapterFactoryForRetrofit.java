@@ -1,8 +1,6 @@
 package com.kotlin.mvvm.repository.api.network;
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;

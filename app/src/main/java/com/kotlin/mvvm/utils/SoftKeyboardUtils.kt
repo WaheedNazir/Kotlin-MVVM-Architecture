@@ -9,9 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 object SoftKeyboardUtils {
 

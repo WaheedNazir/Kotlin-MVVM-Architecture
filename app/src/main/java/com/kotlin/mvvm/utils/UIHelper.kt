@@ -6,9 +6,7 @@ import android.graphics.Point
 import android.util.DisplayMetrics
 import android.view.WindowManager
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 object UIHelper {
 

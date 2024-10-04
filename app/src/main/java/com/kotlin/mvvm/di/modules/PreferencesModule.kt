@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 /**
- * Created by Waheed on 04,November,2019
+ * Created by Waheed
  * Migrated to Hilt 20, June, 2021
  */
 

@@ -18,8 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
- * Created by Waheed on 04,November,2019
- * Migrated to Hilt 20, June, 2021
+ * App module listing all modules
  */
 
 @Module

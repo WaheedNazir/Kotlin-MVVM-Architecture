@@ -2,6 +2,7 @@ package com.kotlin.mvvm.repository.repo.news
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.kotlin.mvvm.BuildConfig
 import com.kotlin.mvvm.app.AppExecutors
 import com.kotlin.mvvm.repository.api.ApiServices
@@ -13,12 +14,11 @@ import com.kotlin.mvvm.repository.model.news.News
 import com.kotlin.mvvm.repository.model.news.NewsSource
 import com.kotlin.mvvm.utils.ConnectivityUtil
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
-
-/**
- * Created by Waheed on 04,November,2019
- */
 
 /**
  * Repository abstracts the logic of fetching the data and persisting it for
@@ -46,18 +46,18 @@ class NewsRepository @Inject constructor(
         return object : NetworkAndDBBoundResource<List<News>, NewsSource>(appExecutors) {
             override fun saveCallResult(item: NewsSource) {
                 if (item.articles.isNotEmpty()) {
-                    newsDao.deleteAllArticles()
-                    newsDao.insertArticles(item.articles)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        newsDao.deleteAllArticles()
+                        newsDao.insertArticles(item.articles)
+                    }
                 }
             }
 
-            override fun shouldFetch(data: List<News>?) =
-                (ConnectivityUtil.isConnected(context))
+            override fun shouldFetch(data: List<News>?) = (ConnectivityUtil.isConnected(context))
 
-            override fun loadFromDb() = newsDao.getNewsArticles()
+            override fun loadFromDb() = newsDao.getNewsArticles().asLiveData()
 
-            override fun createCall() =
-                apiServices.getNewsSource(data)
+            override fun createCall() = apiServices.getNewsSource(data)
 
         }.asLiveData()
     }
@@ -67,8 +67,7 @@ class NewsRepository @Inject constructor(
      * and persist them in the database
      * LiveData<Resource<NewsSource>>
      */
-    fun getNewsArticlesFromServerOnly(countryShortKey: String):
-            LiveData<Resource<NewsSource>> {
+    fun getNewsArticlesFromServerOnly(countryShortKey: String): LiveData<Resource<NewsSource>> {
 
         val data = HashMap<String, String>()
         data["country"] = countryShortKey

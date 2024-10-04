@@ -1,9 +1,7 @@
 package com.kotlin.mvvm.repository.api.network
 
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 /**
  * Status of a resource that is provided to the UI.

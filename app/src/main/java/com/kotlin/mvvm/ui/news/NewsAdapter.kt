@@ -12,9 +12,7 @@ import com.kotlin.mvvm.databinding.RowNewsArticleBinding
 import com.kotlin.mvvm.repository.model.news.News
 import com.kotlin.mvvm.utils.load
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 /**
  * The News adapter to show the news in a list.

@@ -1,13 +1,8 @@
 package com.kotlin.mvvm.repository.model.countries
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-
-
-/**
- * Created by Waheed on 08,November,2019
- */
 
 /**
  * News Article Model an entity that represents a table and holds schema of News articles
@@ -19,8 +14,8 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "countries_table")
 data class Country(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
-    @SerializedName("countryName") var countryName: String? = null,
-    @SerializedName("displayName") var displayName: String? = null,
-    @SerializedName("countryKey") var countryKey: String? = null,
-    @SerializedName("countryFagUrl") var countryFagUrl: String? = null
+    @ColumnInfo(name = "countryName") var countryName: String? = null,
+    @ColumnInfo(name = "displayName") var displayName: String? = null,
+    @ColumnInfo(name = "countryKey") var countryKey: String? = null,
+    @ColumnInfo(name = "countryFagUrl") var countryFagUrl: String? = null
 )

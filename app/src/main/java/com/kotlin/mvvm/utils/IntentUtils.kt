@@ -6,9 +6,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.core.app.ShareCompat
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 
 fun intentShareText(activity: Activity, text: String) {

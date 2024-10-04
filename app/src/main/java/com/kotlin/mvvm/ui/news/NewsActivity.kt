@@ -12,9 +12,7 @@ import com.kotlin.mvvm.utils.extensions.load
 import com.kotlin.mvvm.utils.extensions.toast
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 @AndroidEntryPoint
 class NewsActivity : BaseActivity<ActivityNewsArticlesBinding>() {

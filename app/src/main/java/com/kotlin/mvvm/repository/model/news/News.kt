@@ -1,13 +1,8 @@
 package com.kotlin.mvvm.repository.model.news
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-
-
-/**
- * Created by Waheed on 04,November,2019
- */
 
 /**
  * News Article Model an entity that represents a table and holds schema of News articles
@@ -19,10 +14,10 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "news_table")
 data class News(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
-    @SerializedName("author") var author: String? = null,
-    @SerializedName("title") var title: String? = null,
-    @SerializedName("description") var description: String? = null,
-    @SerializedName("url") var url: String? = null,
-    @SerializedName("urlToImage") var urlToImage: String? = null,
-    @SerializedName("publishedAt") var publishedAt: String? = null
+    @ColumnInfo(name = "author") var author: String? = null,
+    @ColumnInfo(name = "title") var title: String? = null,
+    @ColumnInfo(name = "description") var description: String? = null,
+    @ColumnInfo(name = "url") var url: String? = null,
+    @ColumnInfo(name = "urlToImage") var urlToImage: String? = null,
+    @ColumnInfo(name = "publishedAt") var publishedAt: String? = null
 )

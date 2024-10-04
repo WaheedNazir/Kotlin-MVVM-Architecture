@@ -4,9 +4,7 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 
 /**

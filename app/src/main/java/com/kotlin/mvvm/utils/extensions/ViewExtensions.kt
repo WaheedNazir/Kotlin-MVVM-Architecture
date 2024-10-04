@@ -14,9 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 
-/**
- * Created by Waheed on 04,November,2019
- */
+
 
 fun View.visible() {
     visibility = View.VISIBLE
